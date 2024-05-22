@@ -1,4 +1,4 @@
-package com.compose.experiment.presentations.lottie_animation
+package com.compose.experiment.presentations.animations.lottie_animation
 
 
 import androidx.compose.foundation.layout.Column

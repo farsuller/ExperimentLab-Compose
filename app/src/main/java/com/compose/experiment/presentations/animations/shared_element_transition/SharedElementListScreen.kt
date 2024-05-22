@@ -1,4 +1,4 @@
-package com.compose.experiment.presentations.shared_element_transition
+package com.compose.experiment.presentations.animations.shared_element_transition
 
 
 import androidx.compose.animation.AnimatedVisibilityScope
