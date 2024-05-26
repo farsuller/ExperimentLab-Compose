@@ -4,35 +4,36 @@ package com.compose.experiment.presentations.animations.shared_element_transitio
 import androidx.compose.animation.ExperimentalSharedTransitionApi
 import androidx.compose.animation.SharedTransitionLayout
 import androidx.compose.runtime.Composable
-import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import androidx.navigation.navArgument
+import androidx.navigation.toRoute
 
 @OptIn(ExperimentalSharedTransitionApi::class)
 @Composable
 fun SharedTransitionScreen() {
+    // Layout for shared element transitions
     SharedTransitionLayout {
+        // Create a NavHost for navigation between different destinations
         val navController = rememberNavController()
-        NavHost(navController = navController, startDestination = "list") {
-            composable("list") {
+        NavHost(navController = navController, startDestination = ListScreen) {
+            // Destination for the list screen
+            composable<ListScreen> {
                 SharedElementListScreen(
                     onItemClick = { resId, text ->
-                        navController.navigate("detail/$resId/$text")
+                        // Navigate to the detail screen when an item is clicked
+                        navController.navigate(DetailScreen(resId = resId, text = text))
                     },
                     animatedVisibilityScope = this
                 )
             }
 
-            composable("detail/{resId}/{text}",
-                arguments = listOf(
-                    navArgument("resId") { type = NavType.IntType },
-                    navArgument("text") { type = NavType.StringType }
-                )
-            ) {
-                val resId = it.arguments?.getInt("resId") ?: 0
-                val text = it.arguments?.getString("text") ?: ""
+            // Destination for the detail screen
+            composable<DetailScreen> {
+                val args = it.toRoute<DetailScreen>()
+                // Extract arguments passed from the list screen
+                val resId = args.resId
+                val text = args.text
                 SharedElementDetailScreen(
                     resId = resId,
                     text = text,

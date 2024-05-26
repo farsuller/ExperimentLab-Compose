@@ -1,7 +1,9 @@
 [versions]
+agp = "8.4.1"
+kotlin = "1.9.0"
 activityCompose = "1.9.0"
 coilCompose = "2.5.0"
-composeAnimation = "1.7.0-alpha08"
+composeAnimation = "1.7.0-beta01"
 composeBom = "2024.05.00"
 constraintlayoutCompose = "1.0.1"
 coreKtx = "1.13.1"
@@ -11,13 +13,13 @@ hiltAndroid = "2.50"
 hiltNavigationCompose = "1.2.0"
 junit = "4.13.2"
 junitVersion = "1.1.5"
-kotlinxSerializationJson = "1.6.2"
+kotlinxSerializationJson = "1.6.3"
 ktorClientCio = "2.3.3"
-lifecycleRuntimeKtx = "2.7.0"
+lifecycleRuntimeKtx = "2.8.0"
 lottieCompose = "6.3.0"
 material3 = "1.2.1"
 materialIconsExtended = "1.6.7"
-navigationCompose = "2.7.7"
+navigationCompose = "2.8.0-beta01"
 orbital = "0.3.3"
 postgrestKt = "2.0.3"
 ui = "1.6.7"
@@ -55,3 +57,6 @@ orbital = { module = "com.github.skydoves:orbital", version.ref = "orbital" }
 postgrest-kt = { module = "io.github.jan-tennert.supabase:postgrest-kt", version.ref = "postgrestKt" }
 
 [plugins]
+android-application = { id = "com.android.application", version.ref = "agp" }
+jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }

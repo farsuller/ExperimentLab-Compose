@@ -30,6 +30,8 @@ fun AnimateDpSize() {
         mutableStateOf(defaultDp)
     }
 
+    // `animateSize` is a state variable that smoothly animates between the current and target values of `buttonWidth`.
+    // `animateDpAsState` handles creating the dimension transition animation with the specified `tween` duration of 500ms.
     val animateSize by animateDpAsState(
         targetValue = buttonWidth,
         animationSpec = tween(500),
@@ -46,9 +48,10 @@ fun AnimateDpSize() {
 
         Button(
             onClick = {
+                // Toggle the button width between `defaultDp` and `changeDp`.
                 buttonWidth = if (buttonWidth == defaultDp) changeDp else defaultDp
             },
-            modifier = Modifier.width(animateSize),
+            modifier = Modifier.width(animateSize), // Apply the animated width to the Button.
             shape = RoundedCornerShape(4.dp),
         ) {
             Text(text = "Change Size")

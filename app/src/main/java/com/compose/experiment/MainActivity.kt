@@ -10,6 +10,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.composed
 import com.compose.experiment.presentations.animations.alpha_animations.AnimateAlpha
 import com.compose.experiment.presentations.animations.repeatable_animations.RepeatableAnimate
+import com.compose.experiment.presentations.animations.shared_element_transition.SharedTransitionScreen
 import com.compose.experiment.presentations.animations.textColor_animations.TextColorAnimate
 import com.compose.experiment.ui.theme.ExperimentLabTheme
 import dagger.hilt.android.AndroidEntryPoint
@@ -24,7 +25,7 @@ class MainActivity : ComponentActivity() {
 
         setContent {
             ExperimentLabTheme(dynamicColor = false) {
-                TextColorAnimate()
+                SharedTransitionScreen()
             }
         }
     }

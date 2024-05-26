@@ -34,6 +34,8 @@ fun ColorAnimation() {
     val changeColor = Color(0xFFFF5050)
     var boxColor by remember { mutableStateOf(defaultColor) }
 
+    // `animationColor` is a state variable that smoothly animates between the current and target values of `boxColor`.
+    // `animateColorAsState` handles creating the color transition animation with the specified `tween` duration of 500ms.
     val animationColor by animateColorAsState(
         targetValue = boxColor,
         animationSpec = tween(500),
@@ -50,11 +52,10 @@ fun ColorAnimation() {
         Box(
             modifier = Modifier
                 .clip(RoundedCornerShape(4.dp))
-                .background(animationColor)
+                .background(animationColor) // Apply the animated color to the background of the Box.
                 .padding(4.dp)
                 .animateContentSize(tween(500))
-        )
-        {
+        ) {
             Text(
                 text = defaultText,
                 color = Color.White
@@ -65,7 +66,8 @@ fun ColorAnimation() {
 
         Button(
             onClick = {
-                boxColor = if(boxColor == defaultColor) changeColor else defaultColor
+                // Toggle the box color between `defaultColor` and `changeColor`.
+                boxColor = if (boxColor == defaultColor) changeColor else defaultColor
             },
             modifier = Modifier.fillMaxWidth(),
             shape = RoundedCornerShape(4.dp)

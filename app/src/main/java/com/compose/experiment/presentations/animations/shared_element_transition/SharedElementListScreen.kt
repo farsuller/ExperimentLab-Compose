@@ -49,38 +49,45 @@ fun SharedTransitionScope.SharedElementListScreen(
                 .fillMaxWidth()
                 .clickable { onItemClick(resId, text) }) {
 
+                // Define the shared element transition for the image
                 Image(
                     modifier = Modifier
                         .aspectRatio(16 / 9f)
                         .weight(1f)
-                        .sharedElement(state = rememberSharedContentState(key = "image/$resId"),
+                        // Use sharedElement to specify the shared element transition
+                        .sharedElement(
+                            state = rememberSharedContentState(key = "image/$resId"),
                             animatedVisibilityScope = animatedVisibilityScope,
+                            // Use boundsTransform to specify the transformation during the transition
                             boundsTransform = { _, _ ->
+                                // Use tween to specify the animation behavior
                                 tween(durationMillis = 1000)
-                            }),
+                            }
+                        ),
                     painter = painterResource(id = resId),
                     contentDescription = null
                 )
                 Spacer(modifier = Modifier.width(16.dp))
+                // Define the shared element transition for the text
                 Text(
                     text = text,
                     modifier = Modifier
                         .weight(1F)
-                        .sharedElement(state = rememberSharedContentState(key = "text/$text"),
+                        // Use sharedElement to specify the shared element transition
+                        .sharedElement(
+                            state = rememberSharedContentState(key = "text/$text"),
                             animatedVisibilityScope = animatedVisibilityScope,
+                            // Use boundsTransform to specify the transformation during the transition
                             boundsTransform = { _, _ ->
+                                // Use tween to specify the animation behavior
                                 tween(durationMillis = 1000)
-                            })
+                            }
+                        )
                 )
-
             }
-
         }
-
     }
-
 }
-
 
 @OptIn(ExperimentalSharedTransitionApi::class)
 @Composable
@@ -93,29 +100,39 @@ fun SharedTransitionScope.SharedElementDetailScreen(
         modifier = Modifier.fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-
+        // Define the shared element transition for the image
         Image(
             modifier = Modifier
                 .aspectRatio(16 / 9f)
                 .weight(1f)
-                .sharedElement(state = rememberSharedContentState(key = "image/$resId"),
+                // Use sharedElement to specify the shared element transition
+                .sharedElement(
+                    state = rememberSharedContentState(key = "image/$resId"),
                     animatedVisibilityScope = animatedVisibilityScope,
+                    // Use boundsTransform to specify the transformation during the transition
                     boundsTransform = { _, _ ->
+                        // Use tween to specify the animation behavior
                         tween(durationMillis = 1000)
-                    }),
+                    }
+                ),
             painter = painterResource(id = resId), contentDescription = null
         )
         Spacer(modifier = Modifier.height(16.dp))
+        // Define the shared element transition for the text
         Text(
             text = text,
             modifier = Modifier
                 .weight(1F)
-                .sharedElement(state = rememberSharedContentState(key = "text/$text"),
+                // Use sharedElement to specify the shared element transition
+                .sharedElement(
+                    state = rememberSharedContentState(key = "text/$text"),
                     animatedVisibilityScope = animatedVisibilityScope,
+                    // Use boundsTransform to specify the transformation during the transition
                     boundsTransform = { _, _ ->
+                        // Use tween to specify the animation behavior
                         tween(durationMillis = 1000)
-                    })
+                    }
+                )
         )
-
     }
 }

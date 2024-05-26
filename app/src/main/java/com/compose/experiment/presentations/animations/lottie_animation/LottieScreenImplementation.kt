@@ -18,6 +18,9 @@ import com.compose.experiment.R
 
 @Composable
 fun LottieScreenImplementation() {
+
+    // `rememberLottieComposition` loads the Lottie animation from the raw resource `delivery1` and `delivery2`.
+    // This ensures the animations are only loaded once and remembered across recompositions.
     val lottieDelivery1 by rememberLottieComposition(
         spec = LottieCompositionSpec.RawRes(
             R.raw.delivery1
@@ -29,6 +32,8 @@ fun LottieScreenImplementation() {
         )
     )
 
+    // `animateLottieCompositionAsState` controls the playback progress of the Lottie animation.
+    // It runs the animation indefinitely (IterateForever) for both compositions.
     val progress1 by animateLottieCompositionAsState(
         composition = lottieDelivery1,
         iterations = LottieConstants.IterateForever

@@ -46,14 +46,19 @@ fun ContentAnimation() {
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
 
+        // `AnimatedContent` is used to animate changes in the content when `age` changes.
+        // The `transitionSpec` defines how the animation should occur based on the change in `age`.
         AnimatedContent(targetState = age, label = "animate content", transitionSpec = {
             if (targetState > initialState) {
-                (slideInVertically { height -> height } + fadeIn()).togetherWith(slideOutVertically { height -> -height } + fadeOut())
+                // Animation for when the target state is greater than the initial state (increment age)
+                (slideInVertically { height -> height } + fadeIn())
+                    .togetherWith(slideOutVertically { height -> -height } + fadeOut())
             } else {
-                (slideInVertically { height -> -height } + fadeIn()).togetherWith(slideOutVertically { height -> height } + fadeOut())
+                // Animation for when the target state is less than the initial state (decrement age)
+                (slideInVertically { height -> -height } + fadeIn())
+                    .togetherWith(slideOutVertically { height -> height } + fadeOut())
             }.using(SizeTransform(clip = false))
         }) {
-
             Text(text = age.toString())
         }
 
@@ -72,12 +77,10 @@ fun ContentAnimation() {
             Spacer(modifier = Modifier.width(8.dp))
             Button(
                 onClick = { age-- },
-
                 shape = RoundedCornerShape(4.dp),
             ) {
                 Text(text = "Age-")
             }
         }
-
     }
 }

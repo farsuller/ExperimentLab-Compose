@@ -27,11 +27,16 @@ import androidx.compose.ui.unit.dp
 @Composable
 fun AnimateAlpha() {
 
+    // `alpha` is the state variable that controls the transparency level of the Box.
+    // It is initially set to 1F, which means fully opaque.
     var alpha by remember {
         mutableFloatStateOf(1F)
     }
 
+    // `animateAlpha` is a state variable that smoothly animates between the current and target values of `alpha`.
+    // `animateFloatAsState` takes care of creating the animation with the given `tween` specification of 500ms.
     val animateAlpha by animateFloatAsState(targetValue = alpha, animationSpec = tween(500), label = "animate alpha")
+
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -43,12 +48,13 @@ fun AnimateAlpha() {
         Box(
             modifier = Modifier
                 .size(60.dp)
-                .alpha(alpha = animateAlpha)
+                .alpha(alpha = animateAlpha) // Apply the animated alpha value to the Box.
                 .background(Color.Red)
         )
 
         Button(
             onClick = {
+                // Toggle the alpha value between 0F (fully transparent) and 1F (fully opaque).
                 alpha = if (alpha == 0F) 1F else 0F
             },
             shape = RoundedCornerShape(4.dp),
