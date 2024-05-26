@@ -61,7 +61,7 @@ fun SharedTransitionScope.SharedElementListScreen(
                             // Use boundsTransform to specify the transformation during the transition
                             boundsTransform = { _, _ ->
                                 // Use tween to specify the animation behavior
-                                tween(durationMillis = 1000)
+                                tween(durationMillis = 500)
                             }
                         ),
                     painter = painterResource(id = resId),
@@ -80,7 +80,7 @@ fun SharedTransitionScope.SharedElementListScreen(
                             // Use boundsTransform to specify the transformation during the transition
                             boundsTransform = { _, _ ->
                                 // Use tween to specify the animation behavior
-                                tween(durationMillis = 1000)
+                                tween(durationMillis = 500)
                             }
                         )
                 )
@@ -112,7 +112,7 @@ fun SharedTransitionScope.SharedElementDetailScreen(
                     // Use boundsTransform to specify the transformation during the transition
                     boundsTransform = { _, _ ->
                         // Use tween to specify the animation behavior
-                        tween(durationMillis = 1000)
+                        tween(durationMillis = 500)
                     }
                 ),
             painter = painterResource(id = resId), contentDescription = null
@@ -130,7 +130,7 @@ fun SharedTransitionScope.SharedElementDetailScreen(
                     // Use boundsTransform to specify the transformation during the transition
                     boundsTransform = { _, _ ->
                         // Use tween to specify the animation behavior
-                        tween(durationMillis = 1000)
+                        tween(durationMillis = 500)
                     }
                 )
         )
