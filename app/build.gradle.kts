@@ -97,6 +97,7 @@ dependencies {
 
     implementation(libs.androidx.compose.animation)
 
+    implementation(libs.androidx.biometric)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
