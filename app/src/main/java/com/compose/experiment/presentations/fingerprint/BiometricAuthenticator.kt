@@ -8,13 +8,14 @@ import androidx.fragment.app.FragmentActivity
 
 class BiometricAuthenticator(private val context: Context) {
 
-    // Sets the title and subtitle for the prompt
+    // Instance variables for prompt information and biometric manager
     private lateinit var promptInfo: BiometricPrompt.PromptInfo
     private val biometricManager = BiometricManager.from(context)
     private lateinit var biometricPrompt: BiometricPrompt
 
 
-    fun isBiometricAuthAvailable(): BiometricAuthStatus {
+    // Checks if biometric authentication is available on the device
+    private fun isBiometricAuthAvailable(): BiometricAuthStatus {
         return when (biometricManager.canAuthenticate(BIOMETRIC_STRONG)) {
             BiometricManager.BIOMETRIC_SUCCESS -> BiometricAuthStatus.READY
             BiometricManager.BIOMETRIC_ERROR_NO_HARDWARE -> BiometricAuthStatus.NOT_AVAILABLE
@@ -24,6 +25,7 @@ class BiometricAuthenticator(private val context: Context) {
         }
     }
 
+    // Prompts the user for biometric authentication
     fun promptBiometricAuth(
         title: String,
         subtitle: String,
@@ -33,6 +35,7 @@ class BiometricAuthenticator(private val context: Context) {
         onFailed: () -> Unit,
         onError: (errorCode: Int, errorString: String) -> Unit
     ) {
+        // Check the availability of biometric authentication
         when (isBiometricAuthAvailable()) {
             BiometricAuthStatus.NOT_AVAILABLE -> {
                 onError(BiometricAuthStatus.NOT_AVAILABLE.id, "Not Available for this Device")
@@ -57,6 +60,8 @@ class BiometricAuthenticator(private val context: Context) {
 
             else -> Unit
         }
+
+        // Initialize the biometric prompt with a callback for handling authentication results
         biometricPrompt = BiometricPrompt(
             fragmentActivity,
             object : BiometricPrompt.AuthenticationCallback() {
@@ -77,6 +82,7 @@ class BiometricAuthenticator(private val context: Context) {
             }
         )
 
+        // Build the prompt information with the given title, subtitle, and negative button text
         promptInfo = BiometricPrompt.PromptInfo
             .Builder()
             .setTitle(title)
@@ -84,6 +90,7 @@ class BiometricAuthenticator(private val context: Context) {
             .setNegativeButtonText(negativeButtonText)
             .build()
 
+        // Trigger the biometric authentication prompt
         biometricPrompt.authenticate(promptInfo)
     }
 
