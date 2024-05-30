@@ -9,8 +9,8 @@ import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.composed
-import com.compose.experiment.presentations.circle_reveal_pager.CircularCarouselPager
 import com.compose.experiment.ui.theme.ExperimentLabTheme
+import com.compose.experiment.wrapper.WrapperMainScreen
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -23,8 +23,7 @@ class MainActivity : ComponentActivity() {
 
         setContent {
             ExperimentLabTheme(dynamicColor = false) {
-                // A surface container using the 'background' color from the theme
-                CircularCarouselPager()
+                WrapperMainScreen()
             }
         }
     }
