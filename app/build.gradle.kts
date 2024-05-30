@@ -64,20 +64,19 @@ android {
 }
 
 dependencies {
-   // implementation(platform("androidx.compose:compose-bom:2023.08.00"))
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
-    implementation(libs.androidx.lifecycle.runtime.compose)
 
-    implementation(libs.androidx.ui)
-    implementation(libs.androidx.ui.graphics)
-    implementation(libs.androidx.ui.tooling.preview)
+    implementation(platform(libs.androidx.compose.bom))
+    implementation(libs.ui)
+    implementation(libs.ui.graphics)
+    implementation(libs.ui.tooling.preview)
     implementation(libs.androidx.material3)
+
     implementation(libs.androidx.material.icons.extended)
     implementation(libs.androidx.navigation.compose)
-    implementation(libs.androidx.foundation.layout)
 
     implementation(libs.postgrest.kt)
     implementation(libs.ktor.client.cio)
@@ -85,7 +84,6 @@ dependencies {
 
     implementation(libs.hilt.android)
     kapt(libs.hilt.android.compiler)
-
     implementation(libs.androidx.hilt.navigation.compose)
 
     implementation(libs.lottie.compose)
@@ -98,7 +96,7 @@ dependencies {
     implementation(libs.androidx.compose.animation)
 
     implementation(libs.androidx.biometric)
-
+    
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
