@@ -1,5 +1,6 @@
 [versions]
 agp = "8.4.1"
+appcompat = "1.7.0"
 biometric = "1.2.0-alpha05"
 kotlin = "1.9.0"
 activityCompose = "1.9.0"
@@ -28,6 +29,7 @@ ui = "1.6.7"
 
 [libraries]
 androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "activityCompose" }
+androidx-appcompat = { module = "androidx.appcompat:appcompat", version.ref = "appcompat" }
 androidx-compose-bom = { module = "androidx.compose:compose-bom", version.ref = "composeBom" }
 ui = { module = "androidx.compose.ui:ui" }
 ui-graphics = { module = "androidx.compose.ui:ui-graphics" }

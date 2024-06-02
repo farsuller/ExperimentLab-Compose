@@ -8,7 +8,7 @@ import androidx.lifecycle.viewModelScope
 import com.compose.experiment.data.ApiResult
 import com.compose.experiment.model.User
 import com.compose.experiment.repository.UserRepository
-import com.compose.experiment.wrapper.WrapperRepository
+import com.compose.experiment.presentations.wrapper.WrapperRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow

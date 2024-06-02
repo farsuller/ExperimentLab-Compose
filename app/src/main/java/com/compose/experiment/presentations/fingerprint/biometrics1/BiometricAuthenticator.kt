@@ -1,4 +1,4 @@
-package com.compose.experiment.presentations.fingerprint
+package com.compose.experiment.presentations.fingerprint.biometrics1
 
 import android.content.Context
 import androidx.biometric.BiometricManager

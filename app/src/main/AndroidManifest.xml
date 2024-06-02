@@ -26,7 +26,10 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".presentations.fingerprint.FingerprintFragmentActivity" />
+        <activity android:name=".presentations.fingerprint.biometrics1.FingerprintFragmentActivity" />
+        <activity
+            android:name=".presentations.fingerprint.biometrics2.BiometricAppCompatActivity"
+            android:theme="@style/Theme.ExperimentLab.Biometric"/>
     </application>
 
 </manifest>

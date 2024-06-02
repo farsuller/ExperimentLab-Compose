@@ -1,4 +1,4 @@
-package com.compose.experiment.presentations.fingerprint
+package com.compose.experiment.presentations.fingerprint.biometrics1
 
 
 // Enum class to represent various biometric authentication statuses

@@ -1,6 +1,7 @@
 package com.compose.experiment
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -9,8 +10,8 @@ import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.composed
+import com.compose.experiment.presentations.fingerprint.biometrics2.BiometricAppCompatActivity
 import com.compose.experiment.ui.theme.ExperimentLabTheme
-import com.compose.experiment.wrapper.WrapperMainScreen
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -23,7 +24,7 @@ class MainActivity : ComponentActivity() {
 
         setContent {
             ExperimentLabTheme(dynamicColor = false) {
-                WrapperMainScreen()
+                startActivity(Intent(this, BiometricAppCompatActivity::class.java))
             }
         }
     }

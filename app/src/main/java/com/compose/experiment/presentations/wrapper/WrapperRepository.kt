@@ -1,4 +1,4 @@
-package com.compose.experiment.wrapper
+package com.compose.experiment.presentations.wrapper
 
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
