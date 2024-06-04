@@ -10,28 +10,38 @@ import androidx.biometric.BiometricPrompt.PromptInfo
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.receiveAsFlow
 
-class BiometricPromptManager(
-    val activity: AppCompatActivity
-) {
+// This class manages the biometric prompt and handles the authentication results.
+class BiometricPromptManager(private val activity: AppCompatActivity) {
 
+    // Channel to send biometric authentication results.
     private val resultChannel = Channel<BiometricResult>()
+
+    // Flow to collect the results of the biometric prompt.
     val promptResults = resultChannel.receiveAsFlow()
 
+    // Function to display the biometric prompt with given title and description.
     fun showBiometricPrompt(
         title: String,
         description: String
     ) {
+        // Get the BiometricManager instance.
         val manager = BiometricManager.from(activity)
+
+        // Define the authenticators based on the Android version.
         val authenticators = if (Build.VERSION.SDK_INT >= 30) { BIOMETRIC_STRONG or DEVICE_CREDENTIAL } else { BIOMETRIC_STRONG }
+
+        // Build the biometric prompt information.
         val promptInfo = PromptInfo.Builder()
             .setTitle(title)
             .setDescription(description)
             .setAllowedAuthenticators(authenticators)
 
+        // For older Android versions, set a negative button text.
         if(Build.VERSION.SDK_INT < 30){
             promptInfo.setNegativeButtonText("Cancel")
         }
 
+        // Check the availability of biometric hardware and enrollment status.
         when(manager.canAuthenticate(authenticators)){
             BiometricManager.BIOMETRIC_ERROR_HW_UNAVAILABLE -> {
                 resultChannel.trySend(BiometricResult.HardwareUnavailable)
@@ -48,7 +58,7 @@ class BiometricPromptManager(
             else -> Unit
         }
 
-
+        // Create a BiometricPrompt instance with the authentication callbacks.
         val prompt = BiometricPrompt( activity,
             object : BiometricPrompt.AuthenticationCallback(){
                 override fun onAuthenticationError(errorCode: Int, errString: CharSequence) {
@@ -67,19 +77,7 @@ class BiometricPromptManager(
                 }
             }
         )
-
+        // Authenticate the user with the prompt information.
         prompt.authenticate(promptInfo.build())
-
-    }
-
-
-
-    sealed interface BiometricResult{
-        data object HardwareUnavailable: BiometricResult
-        data object FeatureUnavailable: BiometricResult
-        data object AuthenticationFailed:BiometricResult
-        data object AuthenticationSuccess:BiometricResult
-        data object AuthenticationNotEnrolled:BiometricResult
-        data class AuthenticationError(val error:String):BiometricResult
     }
 }
