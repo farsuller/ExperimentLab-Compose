@@ -54,7 +54,7 @@ android {
         compose = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.1"
+        kotlinCompilerExtensionVersion = "1.5.13"
     }
     packaging {
         resources {
@@ -94,9 +94,10 @@ dependencies {
 
     implementation(libs.orbital)
 
-    implementation(libs.androidx.compose.animation)
-
     implementation(libs.androidx.biometric)
+
+    implementation(libs.androidx.compose.material3.adaptive.navigation.suite)
+    implementation(libs.androidx.compose.material3.adaptive.navigation)
     
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

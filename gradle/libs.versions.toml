@@ -2,7 +2,7 @@
 agp = "8.4.1"
 appcompat = "1.7.0"
 biometric = "1.2.0-alpha05"
-kotlin = "1.9.0"
+kotlin = "1.9.23"
 activityCompose = "1.9.0"
 coilCompose = "2.5.0"
 composeAnimation = "1.7.0-beta01"
@@ -26,6 +26,8 @@ orbital = "0.3.3"
 postgrestKt = "2.0.3"
 ui = "1.6.7"
 
+adaptiveNavigationSuite = "1.0.0-alpha07"
+material3-adaptive = "1.0.0-beta01"
 
 [libraries]
 androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "activityCompose" }
@@ -64,6 +66,10 @@ lottie-compose = { module = "com.airbnb.android:lottie-compose", version.ref = "
 orbital = { module = "com.github.skydoves:orbital", version.ref = "orbital" }
 
 postgrest-kt = { module = "io.github.jan-tennert.supabase:postgrest-kt", version.ref = "postgrestKt" }
+
+androidx-compose-material3-adaptive-navigation = { module = "androidx.compose.material3.adaptive:adaptive-navigation", version.ref = "material3-adaptive" }
+androidx-compose-material3-adaptive-navigation-suite = { module = "androidx.compose.material3:material3-adaptive-navigation-suite", version.ref = "adaptiveNavigationSuite" }
+
 
 androidx-junit = { module = "androidx.test.ext:junit", version.ref = "junitVersion" }
 androidx-ui-test-junit4 = { module = "androidx.compose.ui:ui-test-junit4" }
