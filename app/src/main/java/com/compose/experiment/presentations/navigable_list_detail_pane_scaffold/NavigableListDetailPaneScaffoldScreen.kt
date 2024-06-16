@@ -1,5 +1,5 @@
 @file:OptIn(ExperimentalMaterial3AdaptiveApi::class)
-package com.compose.experiment.presentations.list_pane_detail
+package com.compose.experiment.presentations.navigable_list_detail_pane_scaffold
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -29,15 +29,15 @@ import androidx.compose.ui.unit.dp
 
 
 @Composable
-fun ListDetailPaneScreen(){
+fun NavigableListDetailPaneScaffoldScreen(){
     Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-        ListDetailLayout(
+        NavigableListDetailPaneContent(
             modifier = Modifier.padding(innerPadding)
         )
     }
 }
 @Composable
-fun ListDetailLayout(modifier: Modifier = Modifier) {
+fun NavigableListDetailPaneContent(modifier: Modifier = Modifier) {
     val navigator = rememberListDetailPaneScaffoldNavigator<Any>()
     NavigableListDetailPaneScaffold(
         modifier = modifier,
