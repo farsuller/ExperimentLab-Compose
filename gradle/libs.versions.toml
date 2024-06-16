@@ -21,7 +21,7 @@ lifecycleRuntimeKtx = "2.8.0"
 lottieCompose = "6.3.0"
 material3 = "1.2.1"
 materialIconsExtended = "1.6.7"
-navigationCompose = "2.8.0-beta01"
+navigationCompose = "2.8.0-beta02"
 orbital = "0.3.3"
 postgrestKt = "2.0.3"
 ui = "1.6.7"
@@ -81,3 +81,4 @@ junit = { module = "junit:junit", version.ref = "junit" }
 android-application = { id = "com.android.application", version.ref = "agp" }
 jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
+compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
