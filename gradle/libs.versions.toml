@@ -1,12 +1,12 @@
 [versions]
-agp = "8.4.1"
+agp = "8.4.2"
 appcompat = "1.7.0"
 biometric = "1.2.0-alpha05"
 kotlin = "2.0.0"
 activityCompose = "1.9.0"
 coilCompose = "2.5.0"
 
-composeBom = "2024.05.00"
+composeBom = "2024.06.00"
 constraintlayoutCompose = "1.0.1"
 coreKtx = "1.13.1"
 espressoCore = "3.5.1"
@@ -17,17 +17,17 @@ junit = "4.13.2"
 junitVersion = "1.1.5"
 kotlinxSerializationJson = "1.6.3"
 ktorClientCio = "2.3.3"
-lifecycleRuntimeKtx = "2.8.0"
+lifecycleRuntimeKtx = "2.8.2"
 lottieCompose = "6.3.0"
 material3 = "1.2.1"
-materialIconsExtended = "1.6.7"
-navigationCompose = "2.8.0-beta02"
-orbital = "0.3.3"
+materialIconsExtended = "1.6.8"
+navigationCompose = "2.8.0-beta03"
+orbital = "0.3.4"
 postgrestKt = "2.0.3"
 ui = "1.6.7"
 
 adaptiveNavigationSuite = "1.0.0-alpha07"
-material3-adaptive = "1.0.0-beta01"
+material3-adaptive = "1.0.0-beta03"
 
 [libraries]
 androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "activityCompose" }
