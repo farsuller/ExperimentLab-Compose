@@ -48,6 +48,7 @@ androidx-core-ktx = { module = "androidx.core:core-ktx", version.ref = "coreKtx"
 
 androidx-biometric = { module = "androidx.biometric:biometric", version.ref = "biometric" }
 
+androidx-google-fonts = { module = "androidx.compose.ui:ui-text-google-fonts" }
 
 coil-compose = { module = "io.coil-kt:coil-compose", version.ref = "coilCompose" }
 

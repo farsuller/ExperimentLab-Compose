@@ -95,6 +95,8 @@ dependencies {
 
     implementation(libs.androidx.biometric)
 
+    implementation(libs.androidx.google.fonts)
+
     implementation(libs.androidx.compose.material3.adaptive.navigation.suite)
     implementation(libs.androidx.compose.material3.adaptive.navigation)
     
