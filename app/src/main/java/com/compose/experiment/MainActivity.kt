@@ -9,7 +9,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.composed
-import com.compose.experiment.presentations.navigation_suite_scaffold.NavigationSuiteScaffoldScreen
+import com.compose.experiment.presentations.side_effects.snapshot_flow.SnapshotFlowScreen
 import com.compose.experiment.ui.theme.ExperimentLabTheme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -22,7 +22,7 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             ExperimentLabTheme(dynamicColor = false) {
-                NavigationSuiteScaffoldScreen()
+                SnapshotFlowScreen()
             }
         }
     }
