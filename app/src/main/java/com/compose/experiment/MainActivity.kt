@@ -28,19 +28,3 @@ class MainActivity : ComponentActivity() {
     }
 }
 
-
-@SuppressLint("UnnecessaryComposedModifier")
-fun Modifier.clickableWithoutRipple(
-    interactionSource: MutableInteractionSource,
-    onClick: () -> Unit
-) = composed(
-    factory = {
-        this.then(
-            Modifier.clickable(
-                interactionSource = interactionSource,
-                indication = null,
-                onClick = { onClick() }
-            )
-        )
-    }
-)
