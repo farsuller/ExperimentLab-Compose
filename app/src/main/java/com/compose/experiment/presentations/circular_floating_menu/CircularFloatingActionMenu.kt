@@ -15,9 +15,9 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ExitToApp
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Close
-import androidx.compose.material.icons.filled.ExitToApp
 import androidx.compose.material.icons.filled.MailOutline
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.icons.filled.ShoppingCart
@@ -117,7 +117,7 @@ fun CircularFloatingActionMenu() {
                             }
                         )
                         AppContent(
-                            icon = Icons.Default.ExitToApp, text = "Logout",
+                            icon = Icons.AutoMirrored.Filled.ExitToApp, text = "Logout",
                             modifier = Modifier
                                 .constrainAs(logout) {
                                     top.linkTo(wishlist.bottom)

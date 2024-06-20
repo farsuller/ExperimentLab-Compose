@@ -8,7 +8,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material3.Divider
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -50,7 +50,7 @@ fun CarListWithFilter(cars: List<Car>) {
         ) {
             items(filteredCars) { car ->
                 CarListItem(car = car)
-                Divider() // Optional: Add dividers between list items
+                HorizontalDivider() // Optional: Add dividers between list items
             }
         }
     }

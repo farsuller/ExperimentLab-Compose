@@ -2,7 +2,6 @@ package com.compose.experiment.presentations.hexagon_grid
 
 import android.widget.Toast
 import androidx.compose.foundation.background
-import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -52,7 +51,6 @@ fun HexagonalGrid(modifier: Modifier = Modifier) {
                     .padding(top = topPadding)
                     .offset(x = startOffsetX)
                     .clickableWithoutRipple(
-                        interactionSource = MutableInteractionSource(),
                         onClick = {
                             Toast
                                 .makeText(
