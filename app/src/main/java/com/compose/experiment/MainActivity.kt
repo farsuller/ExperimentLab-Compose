@@ -9,7 +9,7 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
-import com.compose.experiment.presentations.foreground_ui.ForegroundServiceScreen
+import com.compose.experiment.presentations.pull_refresh_lazy_column.PullToRefreshLazyColumnScreen
 import com.compose.experiment.ui.theme.ExperimentLabTheme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -32,14 +32,16 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
 
         // Request necessary location and notification permissions
-        requestLocationPermissions()
+        // requestLocationPermissions()
 
         setContent {
             ExperimentLabTheme(dynamicColor = false) {
-                ForegroundServiceScreen(applicationContext)
+
+                PullToRefreshLazyColumnScreen()
             }
         }
     }
+
 
     // Function to request location and notification permissions
     private fun requestLocationPermissions() {
