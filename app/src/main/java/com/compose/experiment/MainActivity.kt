@@ -9,7 +9,7 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
-import com.compose.experiment.presentations.pull_refresh_lazy_column.PullToRefreshLazyColumnScreen
+import com.compose.experiment.presentations.visual_transformations.VisualTransformationScreen
 import com.compose.experiment.ui.theme.ExperimentLabTheme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -37,14 +37,16 @@ class MainActivity : ComponentActivity() {
         setContent {
             ExperimentLabTheme(dynamicColor = false) {
 
-                PullToRefreshLazyColumnScreen()
+                VisualTransformationScreen()
             }
         }
     }
 
 
+
+
     // Function to request location and notification permissions
-    private fun requestLocationPermissions() {
+    fun requestLocationPermissions() {
         // List of required permissions based on Android version
         val requiredPermissions =
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
