@@ -10,7 +10,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat
-import com.compose.experiment.presentations.custom_worker.CustomWorkerScreen
+import com.compose.experiment.presentations.pagination.PaginatedListScreen
 import com.compose.experiment.ui.theme.ExperimentLabTheme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -39,13 +39,10 @@ class MainActivity : ComponentActivity() {
         setContent {
             ExperimentLabTheme(dynamicColor = false) {
 
-                CustomWorkerScreen(this)
+                PaginatedListScreen()
             }
         }
     }
-
-
-
 
     // Function to request location and notification permissions
     fun requestLocationPermissions() {
