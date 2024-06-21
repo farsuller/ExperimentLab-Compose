@@ -8,8 +8,9 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat
-import com.compose.experiment.presentations.visual_transformations.VisualTransformationScreen
+import com.compose.experiment.presentations.custom_worker.CustomWorkerScreen
 import com.compose.experiment.ui.theme.ExperimentLabTheme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -27,6 +28,7 @@ class MainActivity : ComponentActivity() {
             }
         }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -37,7 +39,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             ExperimentLabTheme(dynamicColor = false) {
 
-                VisualTransformationScreen()
+                CustomWorkerScreen(this)
             }
         }
     }
