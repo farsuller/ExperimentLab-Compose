@@ -10,13 +10,14 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.compose.experiment.MainViewModel
 
 @Composable
 fun WrapperMainScreen() {
 
-    val viewmodel: MainViewModel = viewModel()
+    val viewmodel: MainViewModel = hiltViewModel()
 
 //    val isLoading by viewmodel.isLoading
 //    val error by viewmodel.error

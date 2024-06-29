@@ -10,7 +10,8 @@ import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat
-import com.compose.experiment.presentations.pagination.PaginatedListScreen
+import com.compose.experiment.presentations.observable.ObservableEventsScreen
+import com.compose.experiment.presentations.wrapper.WrapperMainScreen
 import com.compose.experiment.ui.theme.ExperimentLabTheme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -38,8 +39,7 @@ class MainActivity : ComponentActivity() {
 
         setContent {
             ExperimentLabTheme(dynamicColor = false) {
-
-                PaginatedListScreen()
+                ObservableEventsScreen()
             }
         }
     }
