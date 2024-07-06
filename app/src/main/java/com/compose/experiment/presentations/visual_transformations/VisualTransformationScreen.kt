@@ -19,15 +19,15 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
-import com.compose.experiment.CreditCardClass
-import com.compose.experiment.CreditCardObject
-import com.compose.experiment.DateVisualTransformation
-import com.compose.experiment.DateVisualTransformationFormatted
-import com.compose.experiment.NumberVisualTransformation
-import com.compose.experiment.ThousandSeparatorTransformation
-import com.compose.experiment.creditCard
-import com.compose.experiment.creditCardLambda
-import com.compose.experiment.priceFilter
+import com.compose.experiment.utils.CreditCardClass
+import com.compose.experiment.utils.CreditCardObject
+import com.compose.experiment.utils.DateVisualTransformation
+import com.compose.experiment.utils.DateVisualTransformationFormatted
+import com.compose.experiment.utils.NumberVisualTransformation
+import com.compose.experiment.utils.ThousandSeparatorTransformation
+import com.compose.experiment.utils.creditCard
+import com.compose.experiment.utils.creditCardLambda
+import com.compose.experiment.utils.priceFilter
 
 @Composable
     fun VisualTransformationScreen() {

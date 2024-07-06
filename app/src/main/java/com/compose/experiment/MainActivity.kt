@@ -4,15 +4,28 @@ import android.Manifest
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.RequiresApi
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material3.Text
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
 import androidx.core.content.ContextCompat
-import com.compose.experiment.presentations.custom_worker.CustomWorkerScreen
 import com.compose.experiment.ui.theme.ExperimentLabTheme
+import com.compose.experiment.utils.sharedPreferences
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.delay
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
@@ -28,6 +41,9 @@ class MainActivity : ComponentActivity() {
             }
         }
 
+
+    private var token by sharedPreferences(name = "token")
+
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,16 +51,43 @@ class MainActivity : ComponentActivity() {
 
         // Request necessary location and notification permissions
         // requestLocationPermissions()
-
+        token = ""
         setContent {
             ExperimentLabTheme(dynamicColor = false) {
+                var booleanValue by remember { mutableStateOf(false) }
+                var recompositionCount by remember { mutableStateOf(0) }
+                var initialBooleanValue by remember { mutableStateOf<Boolean?>(null) }
 
-                CustomWorkerScreen(this)
+                LaunchedEffect(recompositionCount) {
+                    if (recompositionCount < 4) {
+                        delay(1000) // Wait for 1 second before toggling the boolean
+                        booleanValue = !booleanValue
+                        recompositionCount++
+                        Log.d(
+                            "Recomposition",
+                            "Boolean value: $booleanValue, Recomposition count: $recompositionCount"
+                        )
+                        if (initialBooleanValue == null) {
+                            initialBooleanValue = booleanValue
+                            Log.d("Recomposition", "Initial Boolean value set to: $initialBooleanValue")
+                        }
+                    }
+                }
+
+                Column(
+                    modifier = Modifier.fillMaxSize(),
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    verticalArrangement = Arrangement.Center
+                ) {
+                    Text(text = "Current Boolean value: $booleanValue")
+                    initialBooleanValue?.let {
+                        Text(text = "Initial Boolean value: $it")
+                    }
+
+                }
             }
         }
     }
-
-
 
 
     // Function to request location and notification permissions
@@ -84,4 +127,3 @@ class MainActivity : ComponentActivity() {
         }
     }
 }
-

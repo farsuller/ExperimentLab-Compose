@@ -1,4 +1,4 @@
-package com.compose.experiment
+package com.compose.experiment.utils
 
 import android.content.Context
 import android.content.Intent
@@ -18,8 +18,11 @@ import androidx.compose.ui.text.input.VisualTransformation
 import androidx.core.content.pm.PackageInfoCompat
 import androidx.lifecycle.Lifecycle
 import androidx.navigation.NavHostController
+import com.compose.experiment.R
 import java.text.DecimalFormat
 import java.text.NumberFormat
+
+fun Context.sharedPreferences(name: String) = SharedPreferenceDelegate(this, name)
 
 val creditCardLambda = { it: AnnotatedString ->
     // Making XXXX-XXXX-XXXX-XXXX string.

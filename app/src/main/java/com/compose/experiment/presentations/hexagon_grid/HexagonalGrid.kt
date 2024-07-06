@@ -26,7 +26,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
-import com.compose.experiment.clickableWithoutRipple
+import com.compose.experiment.utils.clickableWithoutRipple
 import com.compose.experiment.components.HexagonShape
 import com.compose.experiment.model.Menus
 

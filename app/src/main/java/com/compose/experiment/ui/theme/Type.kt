@@ -8,7 +8,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.googlefonts.Font
 import androidx.compose.ui.text.googlefonts.GoogleFont
 import androidx.compose.ui.unit.sp
-import com.compose.experiment.provider
+import com.compose.experiment.utils.provider
 
 val roboto = GoogleFont("Roboto")
 
