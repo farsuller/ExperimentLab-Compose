@@ -1,5 +1,6 @@
 package com.compose.experiment.di
 
+import android.content.Context
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import com.compose.experiment.MainViewModel
@@ -8,6 +9,7 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ActivityComponent
+import dagger.hilt.android.qualifiers.ApplicationContext
 
 
 @Module
@@ -15,8 +17,8 @@ import dagger.hilt.android.components.ActivityComponent
 object ViewModelModule {
 
     @Provides
-    fun provideMainViewModule(userRepository: DefaultUserRepository, notificationManager: NotificationManagerCompat, notificationBuilder: NotificationCompat.Builder) : MainViewModel {
-        return MainViewModel(userRepository, notificationManager = notificationManager, notificationBuilder = notificationBuilder)
+    fun provideMainViewModule(userRepository: DefaultUserRepository, notificationManager: NotificationManagerCompat, notificationBuilder: NotificationCompat.Builder, @ApplicationContext context: Context) : MainViewModel {
+        return MainViewModel(userRepository, notificationManager = notificationManager, notificationBuilder = notificationBuilder, context = context)
     }
 
 }
