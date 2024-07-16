@@ -7,8 +7,6 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.RequiresApi
-import androidx.navigation.compose.rememberNavController
-import com.compose.experiment.presentations.notification_with_deeplink.SetupNavGraph
 import com.compose.experiment.ui.theme.ExperimentLabTheme
 import com.compose.experiment.utils.sharedPreferences
 import dagger.hilt.android.AndroidEntryPoint
@@ -41,7 +39,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             ExperimentLabTheme(dynamicColor = false) {
 
-                SetupNavGraph(navController = rememberNavController())
+
             }
         }
     }
