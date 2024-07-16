@@ -1,5 +1,6 @@
 package com.compose.experiment
 
+import android.Manifest
 import android.os.Build
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -7,6 +8,7 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.RequiresApi
+import com.compose.experiment.presentations.observable.ObservableEventsScreen
 import com.compose.experiment.ui.theme.ExperimentLabTheme
 import com.compose.experiment.utils.sharedPreferences
 import dagger.hilt.android.AndroidEntryPoint
@@ -38,12 +40,29 @@ class MainActivity : ComponentActivity() {
         token = ""
         setContent {
             ExperimentLabTheme(dynamicColor = false) {
-
-
+                ObservableEventsScreen()
             }
         }
     }
 
+    // Function to request location and notification permissions
+    fun requestLocationPermissions() {
+        // List of required permissions based on Android version
+        val requiredPermissions =
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
+                mutableListOf(
+                    Manifest.permission.FOREGROUND_SERVICE_LOCATION,
+                    Manifest.permission.ACCESS_FINE_LOCATION
+                )
+            } else {
+                mutableListOf(
+                    Manifest.permission.ACCESS_FINE_LOCATION
+                )
+            }
 
-
+        // Add POST_NOTIFICATIONS permission for Android TIRAMISU and above
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            requiredPermissions.add(Manifest.permission.POST_NOTIFICATIONS)
+        }
+    }
 }
