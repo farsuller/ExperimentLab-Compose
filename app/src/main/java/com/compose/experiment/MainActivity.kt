@@ -1,31 +1,17 @@
 package com.compose.experiment
 
-import android.Manifest
-import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.RequiresApi
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.Text
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
-import androidx.core.content.ContextCompat
+import androidx.navigation.compose.rememberNavController
+import com.compose.experiment.presentations.notification_with_deeplink.SetupNavGraph
 import com.compose.experiment.ui.theme.ExperimentLabTheme
 import com.compose.experiment.utils.sharedPreferences
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.delay
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
@@ -54,76 +40,12 @@ class MainActivity : ComponentActivity() {
         token = ""
         setContent {
             ExperimentLabTheme(dynamicColor = false) {
-                var booleanValue by remember { mutableStateOf(false) }
-                var recompositionCount by remember { mutableStateOf(0) }
-                var initialBooleanValue by remember { mutableStateOf<Boolean?>(null) }
 
-                LaunchedEffect(recompositionCount) {
-                    if (recompositionCount < 4) {
-                        delay(1000) // Wait for 1 second before toggling the boolean
-                        booleanValue = !booleanValue
-                        recompositionCount++
-                        Log.d(
-                            "Recomposition",
-                            "Boolean value: $booleanValue, Recomposition count: $recompositionCount"
-                        )
-                        if (initialBooleanValue == null) {
-                            initialBooleanValue = booleanValue
-                            Log.d("Recomposition", "Initial Boolean value set to: $initialBooleanValue")
-                        }
-                    }
-                }
-
-                Column(
-                    modifier = Modifier.fillMaxSize(),
-                    horizontalAlignment = Alignment.CenterHorizontally,
-                    verticalArrangement = Arrangement.Center
-                ) {
-                    Text(text = "Current Boolean value: $booleanValue")
-                    initialBooleanValue?.let {
-                        Text(text = "Initial Boolean value: $it")
-                    }
-
-                }
+                SetupNavGraph(navController = rememberNavController())
             }
         }
     }
 
 
-    // Function to request location and notification permissions
-    fun requestLocationPermissions() {
-        // List of required permissions based on Android version
-        val requiredPermissions =
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
-                mutableListOf(
-                    Manifest.permission.FOREGROUND_SERVICE_LOCATION,
-                    Manifest.permission.ACCESS_FINE_LOCATION
-                )
-            } else {
-                mutableListOf(
-                    Manifest.permission.ACCESS_FINE_LOCATION
-                )
-            }
 
-        // Add POST_NOTIFICATIONS permission for Android TIRAMISU and above
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            requiredPermissions.add(Manifest.permission.POST_NOTIFICATIONS)
-        }
-
-        // Add additional foreground service permissions for Android UPSIDE_DOWN_CAKE and above
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
-            requiredPermissions.add(Manifest.permission.FOREGROUND_SERVICE)
-            requiredPermissions.add(Manifest.permission.FOREGROUND_SERVICE_DATA_SYNC)
-        }
-
-        // Filter out already granted permissions
-        val permissionsToRequest = requiredPermissions.filter {
-            ContextCompat.checkSelfPermission(this, it) != PackageManager.PERMISSION_GRANTED
-        }
-
-        // Request the remaining permissions
-        if (permissionsToRequest.isNotEmpty()) {
-            requestPermissionLauncher.launch(permissionsToRequest.toTypedArray())
-        }
-    }
 }

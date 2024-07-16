@@ -1,5 +1,7 @@
 package com.compose.experiment.di
 
+import androidx.core.app.NotificationCompat
+import androidx.core.app.NotificationManagerCompat
 import com.compose.experiment.MainViewModel
 import com.compose.experiment.repository.DefaultUserRepository
 import dagger.Module
@@ -13,8 +15,8 @@ import dagger.hilt.android.components.ActivityComponent
 object ViewModelModule {
 
     @Provides
-    fun provideMainViewModule(userRepository: DefaultUserRepository) : MainViewModel {
-        return MainViewModel(userRepository)
+    fun provideMainViewModule(userRepository: DefaultUserRepository, notificationManager: NotificationManagerCompat, notificationBuilder: NotificationCompat.Builder) : MainViewModel {
+        return MainViewModel(userRepository, notificationManager = notificationManager, notificationBuilder = notificationBuilder)
     }
 
 }
