@@ -26,45 +26,47 @@ fun PaginatedListScreen() {
     val state = viewModel.state
     val context = LocalContext.current
 
-        LazyColumn(modifier = Modifier.fillMaxSize()) {
+    LazyColumn(modifier = Modifier.fillMaxSize()) {
 
-            items(state.items.size) { index ->
-                val item = state.items[index]
+        items(state.items.size) { index ->
+            val item = state.items[index]
 
-                if (index >= state.items.size - 1 && !state.endReached && !state.isLoading) {
-                    viewModel.loadNextItems()
-                }
-                Column(
+            if (index >= state.items.size - 1 && !state.endReached && !state.isLoading) {
+                viewModel.loadNextItems()
+            }
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(16.dp)
+                    .clickableWithoutRipple {
+                        Toast
+                            .makeText(context, "Item clicked ${item.title}", Toast.LENGTH_SHORT)
+                            .show()
+                    }
+            ) {
+                Text(
+                    text = item.title,
+                    fontSize = 20.sp,
+                )
+
+                Spacer(modifier = Modifier.height(8.dp))
+
+                Text(text = item.description)
+
+            }
+        }
+
+        item {
+            if (state.isLoading) {
+                Row(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(16.dp)
-                        .clickableWithoutRipple {
-                            Toast.makeText(context, "Item clicked ${item.title}", Toast.LENGTH_SHORT).show()
-                        }
+                        .padding(8.dp),
+                    horizontalArrangement = Arrangement.Center
                 ) {
-                    Text(
-                        text = item.title,
-                        fontSize = 20.sp,
-                    )
-
-                    Spacer(modifier = Modifier.height(8.dp))
-
-                    Text(text = item.description)
-
-                }
-            }
-
-            item {
-                if (state.isLoading) {
-                    Row(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(8.dp),
-                        horizontalArrangement = Arrangement.Center
-                    ) {
-                        CircularProgressIndicator()
-                    }
+                    CircularProgressIndicator()
                 }
             }
         }
     }
+}

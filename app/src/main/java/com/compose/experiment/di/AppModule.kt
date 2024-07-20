@@ -13,6 +13,7 @@ import androidx.core.app.NotificationManagerCompat
 import androidx.core.net.toUri
 import com.compose.experiment.MainActivity
 import com.compose.experiment.R
+import com.compose.experiment.presentations.local_search.TodoSearchManager
 import com.compose.experiment.presentations.notification_with_deeplink.MY_ARG
 import com.compose.experiment.presentations.notification_with_deeplink.MY_URI
 import com.compose.experiment.receiver.MyReceiver
@@ -25,7 +26,7 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-object NotificationModule {
+object AppModule {
 
     // Provides a singleton instance of NotificationCompat.Builder
     @Singleton
@@ -89,4 +90,9 @@ object NotificationModule {
         }
         return notificationManager  // Returns the NotificationManagerCompat instance
     }
+
+    @Singleton
+    @Provides
+    fun provideTodoSearchManager(@ApplicationContext context: Context)= TodoSearchManager(context)
+
 }

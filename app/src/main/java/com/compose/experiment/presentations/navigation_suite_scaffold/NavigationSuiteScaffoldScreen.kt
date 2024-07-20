@@ -2,6 +2,7 @@ package com.compose.experiment.presentations.navigation_suite_scaffold
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Search
@@ -24,6 +25,7 @@ fun NavigationSuiteScaffoldScreen() {
     Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
         var selectedItem by remember { mutableIntStateOf(0) }
         NavigationSuiteScaffold(
+            modifier = Modifier.padding(innerPadding),
             navigationSuiteItems = {
                 Screen.entries.forEachIndexed { index, screen ->
                     item(

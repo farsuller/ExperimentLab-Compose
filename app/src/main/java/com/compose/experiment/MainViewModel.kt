@@ -6,19 +6,22 @@ import android.content.pm.PackageManager
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
 import androidx.core.app.ActivityCompat
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
-
-import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.compose.experiment.data.ApiResult
 import com.compose.experiment.model.User
+import com.compose.experiment.presentations.local_search.Todo
+import com.compose.experiment.presentations.local_search.TodoListState
+import com.compose.experiment.presentations.local_search.TodoSearchManager
 import com.compose.experiment.presentations.wrapper.WrapperRepository
 import com.compose.experiment.repository.UserRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableSharedFlow
@@ -29,7 +32,9 @@ import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import java.util.UUID
 import javax.inject.Inject
+import kotlin.random.Random
 
 @HiltViewModel
 class MainViewModel @Inject constructor(
@@ -37,7 +42,8 @@ class MainViewModel @Inject constructor(
     private val wrapperRepository: WrapperRepository = WrapperRepository(),
     private val notificationBuilder: NotificationCompat.Builder,
     private val notificationManager: NotificationManagerCompat,
-    @ApplicationContext private val context: Context
+    private val todoSearchManager: TodoSearchManager,
+    @ApplicationContext private val context: Context,
 ) : ViewModel() {
 
 
@@ -67,33 +73,105 @@ class MainViewModel @Inject constructor(
     var isLoggedIn by mutableStateOf(false)
         private set
 
-    var state by mutableStateOf(LoginState())
+    var loginState by mutableStateOf(LoginState())
         private set
 
+    var state by mutableStateOf(TodoListState())
+        private set // With a private setter, the state can be accessed or read in the UI but can only be modified in the view model.
 
-    fun login(){
+    private var searchJob: Job? = null
+
+    val generateToDoList = (1..100).map {
+        Todo(
+            namespace = "my_todos",
+            id = UUID.randomUUID().toString(),
+            score = 1,
+            title = "Todo $it",
+            text = "Description $it",
+            isDone = Random.nextBoolean(),
+        )
+    }// Initialize the todo search manager.
+
+    init {
         viewModelScope.launch {
-            state = state.copy(isLoading = true)
+            todoSearchManager.init()
+
+            todoSearchManager.putTodos(generateToDoList) // Add the generated todos to the manager.
+            state =
+                state.copy(todos = generateToDoList) // Set the initial state with the default todos
+        }
+    }
+
+    fun onSearchQueryChange(query: String) {
+        state = state.copy(searchQuery = query) // Update the state's search query.
+
+        searchJob?.cancel() // Cancel any ongoing search job.
+
+        searchJob = viewModelScope.launch {
+            delay(500L) // Add a delay to debounce the search input.
+            if (query.isBlank()) {
+                state = state.copy(todos = generateToDoList)
+            } else {
+                val todos = todoSearchManager.searchTodos(query)
+                state = state.copy(todos = todos)
+            }
+        }
+    }
+
+    fun onDoneChange(todo: Todo, isDone: Boolean) {
+        viewModelScope.launch {
+            // Update the todos 'isDone' status in the manager.
+            todoSearchManager.putTodos(listOf(todo.copy(isDone = isDone)))
+
+            // Update the state with the modified todo.
+            state = state.copy(
+                todos = state.todos.map {
+                    if (it.id == todo.id) {
+                        it.copy(isDone = isDone)
+                    } else {
+                        it
+                    }
+                }
+            )
+        }
+    }
+
+    override fun onCleared() {
+        todoSearchManager.closeSession()
+        super.onCleared()
+    }
+
+    fun login() {
+        viewModelScope.launch {
+            loginState = loginState.copy(isLoading = true)
             delay(3000L)
 
             //navigationChannel.send(NavigationEvent.NavigateToProfile)
             _navigationEvents.emit(NavigationEvent.NavigateToProfile)
 
-            state = state.copy(
+            loginState = loginState.copy(
                 isLoading = false,
             )
         }
     }
 
     fun showSimpleNotification() {
-        if (ActivityCompat.checkSelfPermission(context, android.Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
+        if (ActivityCompat.checkSelfPermission(
+                context,
+                android.Manifest.permission.POST_NOTIFICATIONS
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
             return
         }
         notificationManager.notify(1, notificationBuilder.build())
     }
 
     fun updateSimpleNotification() {
-        if (ActivityCompat.checkSelfPermission(context, android.Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
+        if (ActivityCompat.checkSelfPermission(
+                context,
+                android.Manifest.permission.POST_NOTIFICATIONS
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
             return
         }
         notificationManager.notify(
@@ -148,11 +226,11 @@ class MainViewModel @Inject constructor(
     }
 }
 
-sealed interface NavigationEvent{
-    data object NavigateToProfile: NavigationEvent
+sealed interface NavigationEvent {
+    data object NavigateToProfile : NavigationEvent
 }
 
 data class LoginState(
-    val isLoading:Boolean = false,
-    val isLoggedIn:Boolean = false
+    val isLoading: Boolean = false,
+    val isLoggedIn: Boolean = false
 )

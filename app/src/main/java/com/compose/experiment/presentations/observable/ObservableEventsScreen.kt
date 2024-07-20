@@ -15,7 +15,6 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.compose.LocalLifecycleOwner
 import androidx.lifecycle.repeatOnLifecycle
-import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
@@ -37,7 +36,7 @@ fun ObservableEventsScreen() {
     {
         composable("login") {
             val viewModel : MainViewModel = hiltViewModel()
-            val state = viewModel.state
+            val state = viewModel.loginState
 
 
             ObserveAsEvents(flow = viewModel.navigationEventsChannelFlow) { events ->
