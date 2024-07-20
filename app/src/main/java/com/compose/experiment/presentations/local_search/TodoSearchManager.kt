@@ -1,11 +1,13 @@
 package com.compose.experiment.presentations.local_search
 
 import android.content.Context
+import android.os.Build
 import androidx.appsearch.app.AppSearchSession
 import androidx.appsearch.app.PutDocumentsRequest
 import androidx.appsearch.app.SearchSpec
 import androidx.appsearch.app.SetSchemaRequest
 import androidx.appsearch.localstorage.LocalStorage
+import androidx.appsearch.platformstorage.PlatformStorage
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
@@ -17,11 +19,13 @@ class TodoSearchManager
 
     suspend fun init() {
         withContext(Dispatchers.IO) {
-            // Create an AppSearch session for local storage.
-            // LocalStorage.createSearchSessionAsync will return null if the operation was not successful.
-            val sessionFuture = LocalStorage.createSearchSessionAsync(
-                LocalStorage.SearchContext.Builder(context, DATABASE_NAME).build()
-            )
+            // Creates a [AppSearchSession], for S+ devices uses PlatformStorage, for R- devices uses
+            // LocalStorage session.
+            val sessionFuture = if (Build.VERSION.SDK_INT >= 31){
+                PlatformStorage.createSearchSessionAsync(PlatformStorage.SearchContext.Builder(context, DATABASE_NAME).build())
+            } else{
+                LocalStorage.createSearchSessionAsync(LocalStorage.SearchContext.Builder(context, DATABASE_NAME).build())
+            }
 
             // Define the schema for the Todo document class.
             val setSchemaRequest = SetSchemaRequest.Builder()
