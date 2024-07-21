@@ -16,24 +16,22 @@ import androidx.navigation.NavHostController
 import com.compose.experiment.MainViewModel
 
 @Composable
-fun MainScreen(
-    navController: NavHostController,
-    mainViewModel: MainViewModel = hiltViewModel()
-) {
+fun MainScreen(navController: NavHostController) {
+    val viewModel: MainViewModel = hiltViewModel()
     Column(
         modifier = Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Button(onClick = mainViewModel::showSimpleNotification) {
+        Button(onClick = viewModel::showSimpleNotification) {
             Text(text = "Simple Notification")
         }
         Spacer(modifier = Modifier.height(12.dp))
-        Button(onClick = mainViewModel::updateSimpleNotification) {
+        Button(onClick = viewModel::updateSimpleNotification) {
             Text(text = "Update Notification")
         }
         Spacer(modifier = Modifier.height(12.dp))
-        Button(onClick = mainViewModel::cancelSimpleNotification) {
+        Button(onClick = viewModel::cancelSimpleNotification) {
             Text(text = "Cancel Notification")
         }
         Spacer(modifier = Modifier.height(12.dp))
