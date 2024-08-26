@@ -105,7 +105,8 @@ dependencies {
 
     kapt(libs.androidx.appsearch.compiler)
     implementation(libs.bundles.appsearch)
-    
+
+    implementation(libs.kotlinx.coroutines.test)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

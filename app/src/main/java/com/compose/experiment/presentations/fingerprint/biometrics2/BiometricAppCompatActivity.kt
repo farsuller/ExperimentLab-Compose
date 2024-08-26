@@ -16,10 +16,10 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.compose.experiment.ui.theme.ExperimentLabTheme
 
 
@@ -38,7 +38,7 @@ class BiometricAppCompatActivity : AppCompatActivity() {
             ExperimentLabTheme(dynamicColor = false) {
 
                 // Collect biometric authentication results as a state.
-                val biometricResult by promptManager.promptResults.collectAsState(initial = null)
+                val biometricResult by promptManager.promptResults.collectAsStateWithLifecycle(null,this)
 
                 // Launcher for the activity result when the user needs to enroll for biometric authentication.
                 val enrollLauncher =
