@@ -7,6 +7,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.icons.filled.Settings
+import androidx.compose.material3.Button
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -21,7 +22,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 
 @Composable
-fun NavigationSuiteScaffoldScreen() {
+fun NavigationSuiteScaffoldScreen(onBackClick: () -> Unit = {}) {
     Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
         var selectedItem by remember { mutableIntStateOf(0) }
         NavigationSuiteScaffold(
@@ -50,6 +51,9 @@ fun NavigationSuiteScaffoldScreen() {
                Screen.entries.forEachIndexed { index, screen ->
                    if (index == selectedItem) {
                        Text(text = screen.title)
+                       Button(onClick = onBackClick) {
+                           Text(text = "Back")
+                       }
                    }
                }
             }

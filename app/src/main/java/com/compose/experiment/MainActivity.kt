@@ -8,10 +8,13 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.RequiresApi
-import com.compose.experiment.presentations.local_search.LocalSearchScreen
+import com.compose.experiment.presentations.snackbars.SnackBarAcrossScreen
+
 import com.compose.experiment.ui.theme.ExperimentLabTheme
 import com.compose.experiment.utils.sharedPreferences
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
+import kotlinx.serialization.Serializable
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
@@ -40,10 +43,13 @@ class MainActivity : ComponentActivity() {
         token = ""
         setContent {
             ExperimentLabTheme(dynamicColor = false) {
-                LocalSearchScreen()
+
+                SnackBarAcrossScreen()
             }
         }
     }
+
+
 
     // Function to request location and notification permissions
     fun requestLocationPermissions() {

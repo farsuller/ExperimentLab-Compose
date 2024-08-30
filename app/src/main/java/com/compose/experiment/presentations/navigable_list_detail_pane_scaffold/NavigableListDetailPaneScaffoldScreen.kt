@@ -23,21 +23,35 @@ import androidx.compose.material3.adaptive.layout.ListDetailPaneScaffoldRole
 import androidx.compose.material3.adaptive.navigation.NavigableListDetailPaneScaffold
 import androidx.compose.material3.adaptive.navigation.rememberListDetailPaneScaffoldNavigator
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.viewmodel.compose.viewModel
+import com.compose.experiment.MainViewModel
+import com.compose.experiment.presentations.snackbars.SnackbarController
+import com.compose.experiment.presentations.snackbars.SnackbarEvent
+import kotlinx.coroutines.launch
 
 
 @Composable
-fun NavigableListDetailPaneScaffoldScreen(){
+fun NavigableListDetailPaneScaffoldScreen(onClick: (Int) -> Unit= {}){
+
+
     Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
         NavigableListDetailPaneContent(
-            modifier = Modifier.padding(innerPadding)
+            modifier = Modifier.padding(innerPadding),
+            onClick = onClick
         )
     }
 }
 @Composable
-fun NavigableListDetailPaneContent(modifier: Modifier = Modifier) {
+fun NavigableListDetailPaneContent(modifier: Modifier = Modifier,
+                                   onClick : (Int) -> Unit = {}) {
+
+    val scope = rememberCoroutineScope()
+
     val navigator = rememberListDetailPaneScaffoldNavigator<Any>()
     NavigableListDetailPaneScaffold(
         modifier = modifier,
@@ -58,6 +72,17 @@ fun NavigableListDetailPaneContent(modifier: Modifier = Modifier) {
                                     pane = ListDetailPaneScaffoldRole.Detail,
                                     content = "Item $it"
                                 )
+                                if(it % 2 == 0){
+                                    scope.launch {
+                                        SnackbarController.sendEvent(
+                                            event = SnackbarEvent(
+                                                message = "Item $it clicked",
+                                            )
+                                        )
+                                    }
+                                }
+                                else onClick(it)
+
                             }
                             .padding(16.dp)
                     )

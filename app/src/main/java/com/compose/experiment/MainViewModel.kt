@@ -17,6 +17,9 @@ import com.compose.experiment.model.User
 import com.compose.experiment.presentations.local_search.Todo
 import com.compose.experiment.presentations.local_search.TodoListState
 import com.compose.experiment.presentations.local_search.TodoSearchManager
+import com.compose.experiment.presentations.snackbars.SnackbarAction
+import com.compose.experiment.presentations.snackbars.SnackbarController
+import com.compose.experiment.presentations.snackbars.SnackbarEvent
 import com.compose.experiment.presentations.wrapper.WrapperRepository
 import com.compose.experiment.repository.UserRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -151,6 +154,28 @@ class MainViewModel @Inject constructor(
 
             loginState = loginState.copy(
                 isLoading = false,
+            )
+        }
+    }
+
+    fun showSnackBar(item : Int , actionPressed : () -> Unit = {}){
+        viewModelScope.launch {
+            SnackbarController.sendEvent(
+                event = SnackbarEvent(
+                    message = "Clicked from ViewModel Item is $item",
+                    action = SnackbarAction(
+                        name = "Click me",
+                        action = {
+                            SnackbarController.sendEvent(
+                                event = SnackbarEvent(
+                                    message = "Action pressed"
+                                )
+                            )
+                            actionPressed()
+                        }
+                    ),
+
+                )
             )
         }
     }
