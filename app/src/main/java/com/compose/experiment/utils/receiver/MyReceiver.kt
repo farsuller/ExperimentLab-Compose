@@ -1,4 +1,4 @@
-package com.compose.experiment.receiver
+package com.compose.experiment.utils.receiver
 
 import android.content.BroadcastReceiver
 import android.content.Context

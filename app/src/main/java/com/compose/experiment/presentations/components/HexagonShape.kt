@@ -1,4 +1,4 @@
-package com.compose.experiment.components
+package com.compose.experiment.presentations.components
 
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Outline

@@ -1,8 +1,8 @@
 package com.compose.experiment.di
 
 import com.compose.experiment.data.UserDataSource
-import com.compose.experiment.repository.DefaultUserRepository
-import com.compose.experiment.repository.UserRepository
+import com.compose.experiment.presentations.pagination.repository.DefaultUserRepository
+import com.compose.experiment.presentations.pagination.repository.UserRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

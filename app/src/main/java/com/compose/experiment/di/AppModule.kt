@@ -16,7 +16,7 @@ import com.compose.experiment.R
 import com.compose.experiment.presentations.local_search.TodoSearchManager
 import com.compose.experiment.presentations.notification_with_deeplink.MY_ARG
 import com.compose.experiment.presentations.notification_with_deeplink.MY_URI
-import com.compose.experiment.receiver.MyReceiver
+import com.compose.experiment.utils.receiver.MyReceiver
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

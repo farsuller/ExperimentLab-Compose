@@ -1,4 +1,4 @@
-package com.compose.experiment.repository
+package com.compose.experiment.presentations.pagination.repository
 
 import com.compose.experiment.model.ListItem
 import kotlinx.coroutines.delay

@@ -1,4 +1,4 @@
-package com.compose.experiment.pagination
+package com.compose.experiment.presentations.pagination.pagination
 
 // Default implementation of the Paginator interface.
 class DefaultPaginator<Key, Item>(

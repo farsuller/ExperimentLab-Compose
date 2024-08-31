@@ -1,4 +1,4 @@
-package com.compose.experiment.components
+package com.compose.experiment.presentations.components
 
 import androidx.compose.ui.geometry.Rect
 import androidx.compose.ui.geometry.Size

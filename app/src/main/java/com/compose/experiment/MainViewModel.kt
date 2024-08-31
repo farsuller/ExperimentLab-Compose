@@ -21,7 +21,7 @@ import com.compose.experiment.presentations.snackbars.SnackbarAction
 import com.compose.experiment.presentations.snackbars.SnackbarController
 import com.compose.experiment.presentations.snackbars.SnackbarEvent
 import com.compose.experiment.presentations.wrapper.WrapperRepository
-import com.compose.experiment.repository.UserRepository
+import com.compose.experiment.presentations.pagination.repository.UserRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.Job

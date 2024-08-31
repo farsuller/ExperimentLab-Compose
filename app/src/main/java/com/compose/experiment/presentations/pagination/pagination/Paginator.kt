@@ -1,4 +1,4 @@
-package com.compose.experiment.pagination
+package com.compose.experiment.presentations.pagination.pagination
 
 // Defines a Paginator interface with methods for
 // loading the next set of items and resetting the paginator.

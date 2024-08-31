@@ -5,8 +5,8 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.compose.experiment.pagination.DefaultPaginator
-import com.compose.experiment.repository.PaginationRepository
+import com.compose.experiment.presentations.pagination.pagination.DefaultPaginator
+import com.compose.experiment.presentations.pagination.repository.PaginationRepository
 import kotlinx.coroutines.launch
 
 class PaginationViewModel : ViewModel() {

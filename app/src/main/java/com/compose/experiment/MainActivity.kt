@@ -8,13 +8,10 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.RequiresApi
-import com.compose.experiment.presentations.snackbars.SnackBarAcrossScreen
-
+import com.compose.experiment.presentations.design_pattern.presentation.CarScreen
 import com.compose.experiment.ui.theme.ExperimentLabTheme
 import com.compose.experiment.utils.sharedPreferences
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.launch
-import kotlinx.serialization.Serializable
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
@@ -44,7 +41,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             ExperimentLabTheme(dynamicColor = false) {
 
-                SnackBarAcrossScreen()
+                CarScreen()
             }
         }
     }
