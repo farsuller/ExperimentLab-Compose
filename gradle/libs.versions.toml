@@ -1,7 +1,9 @@
 [versions]
 agp = "8.5.2"
 appcompat = "1.7.0"
+arrowCore = "1.2.0"
 biometric = "1.2.0-alpha05"
+converterGson = "2.9.0"
 kotlin = "2.0.0"
 activityCompose = "1.9.1"
 coilCompose = "2.5.0"
@@ -25,6 +27,7 @@ materialIconsExtended = "1.6.8"
 navigationCompose = "2.8.0-rc01"
 orbital = "0.3.4"
 postgrestKt = "2.0.3"
+retrofit = "2.11.0"
 ui = "1.6.7"
 
 adaptiveNavigationSuite = "1.0.0-alpha07"
@@ -40,6 +43,10 @@ androidx-activity-compose = { module = "androidx.activity:activity-compose", ver
 androidx-appcompat = { module = "androidx.appcompat:appcompat", version.ref = "appcompat" }
 androidx-compose-bom = { module = "androidx.compose:compose-bom", version.ref = "composeBom" }
 androidx-lifecycle-viewmodel-compose = { module = "androidx.lifecycle:lifecycle-viewmodel-compose", version.ref = "lifecycleViewmodelCompose" }
+arrow-core = { module = "io.arrow-kt:arrow-core", version.ref = "arrowCore" }
+arrow-fx-coroutines = { module = "io.arrow-kt:arrow-fx-coroutines", version.ref = "arrowCore" }
+converter-gson = { module = "com.squareup.retrofit2:converter-gson", version.ref = "converterGson" }
+retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" }
 ui = { module = "androidx.compose.ui:ui" }
 ui-graphics = { module = "androidx.compose.ui:ui-graphics" }
 ui-tooling-preview = { module = "androidx.compose.ui:ui-tooling-preview" }

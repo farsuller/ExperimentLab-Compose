@@ -1,4 +1,4 @@
-package com.compose.experiment.sealed_enum
+package com.compose.experiment.utils.sealed_enum
 
 // in sealed class we deal with instances
 // sealed class offer more flexibility than enum class
@@ -19,7 +19,7 @@ enum class HttpErrorEnum(val code : Int){
     NotFound(404)
 }
 
-// sealed interface doesn't have a constructor
+// sealed interface offer more flexibility than sealed class, unlike sealed class we can have individual instances
 sealed interface HttpErrorInterface {
     data object Unauthorized : HttpErrorInterface
     data object NotFound : HttpErrorInterface
