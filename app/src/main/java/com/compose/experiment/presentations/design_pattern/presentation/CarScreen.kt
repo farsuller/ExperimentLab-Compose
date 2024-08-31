@@ -2,10 +2,8 @@ package com.compose.experiment.presentations.design_pattern.presentation
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -15,6 +13,7 @@ import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
@@ -25,22 +24,39 @@ import com.compose.experiment.presentations.design_pattern.domain.model.Car
 @Composable
 fun CarScreen() {
     val carViewModel: CarViewModel = hiltViewModel()
-    val carList by carViewModel.cars.collectAsState(emptyList()) // Collect the cars as state
+    val carList by carViewModel.cars.collectAsState(emptyList())
 
-    // Display the UI
-    Column(modifier = Modifier.fillMaxSize().padding(16.dp)) {
+    LaunchedEffect(carList) {
+        println("Current car list: $carList")
+    }
+
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(16.dp)
+    ) {
         Text(
             text = "Car List",
             style = MaterialTheme.typography.labelLarge,
             modifier = Modifier.padding(bottom = 16.dp)
         )
 
-        Row(modifier = Modifier.fillMaxWidth().padding(bottom = 16.dp)) {
-            Button(onClick = { carViewModel.addCar(Car(1, "Toyota", "Camry", 2021)) }){
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(bottom = 16.dp)
+        ) {
+            Button(onClick = {
+                carViewModel.addCar(Car(carList.size + 1, "Toyota", "Camry", 2021))
+            }) {
                 Text("Add Car")
             }
 
-            Button(onClick = { carViewModel.removeCar(1) }){
+            Button(onClick = {
+                if (carList.isNotEmpty()) {
+                    carViewModel.removeCar(carList.first().id)
+                }
+            }) {
                 Text("Remove Car")
             }
 
@@ -48,16 +64,10 @@ fun CarScreen() {
 
         LazyColumn {
             items(carList) { car ->
+                println("Current car: $car")
                 CarItem(car)
+
             }
-        }
-
-        Spacer(modifier = Modifier.height(16.dp))
-
-        Button(onClick = {
-            carViewModel.addCar(Car(3, "Honda", "Civic", 2023))
-        }) {
-            Text("Add Honda Civic")
         }
     }
 }
@@ -72,6 +82,7 @@ fun CarItem(car: Car) {
     ) {
         Row(modifier = Modifier.padding(16.dp)) {
             Column {
+                Text(text = "Id: ${car.id}", style = MaterialTheme.typography.labelSmall)
                 Text(text = "Make: ${car.make}", style = MaterialTheme.typography.labelSmall)
                 Text(text = "Model: ${car.model}", style = MaterialTheme.typography.labelSmall)
                 Text(text = "Year: ${car.year}", style = MaterialTheme.typography.labelSmall)
