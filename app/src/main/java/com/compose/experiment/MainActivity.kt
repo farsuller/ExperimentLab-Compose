@@ -8,7 +8,7 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.RequiresApi
-import com.compose.experiment.store.presenstation.products_screen.ProductScreen
+import com.compose.experiment.kitsu.presenstation.navigation.KitsuNavigation
 import com.compose.experiment.ui.theme.ExperimentLabTheme
 import com.compose.experiment.utils.sharedPreferences
 import dagger.hilt.android.AndroidEntryPoint
@@ -35,17 +35,13 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
 
-        // Request necessary location and notification permissions
-        // requestLocationPermissions()
         token = ""
         setContent {
             ExperimentLabTheme(dynamicColor = false) {
-
-                ProductScreen()
+                KitsuNavigation()
             }
         }
     }
-
 
 
     // Function to request location and notification permissions

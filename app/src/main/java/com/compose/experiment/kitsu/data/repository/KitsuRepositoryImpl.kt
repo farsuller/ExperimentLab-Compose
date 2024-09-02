@@ -1,9 +1,30 @@
 package com.compose.experiment.kitsu.data.repository
 
+import com.compose.experiment.kitsu.data.remote.KitsuApi
+import com.compose.experiment.kitsu.domain.model.AnimeData
 import com.compose.experiment.kitsu.domain.repository.KitsuRepository
+import com.skydoves.sandwich.onSuccess
+import javax.inject.Inject
 
-class KitsuRepositoryImpl : KitsuRepository {
-    override fun getAnimeList() {
-        TODO("Not yet implemented")
+class KitsuRepositoryImpl @Inject constructor(
+    private val api: KitsuApi
+) : KitsuRepository {
+
+    override suspend fun getTrendingAnimeList(): List<AnimeData> {
+        var animeList: List<AnimeData> = emptyList()
+        api.getTrendingAnimeList()
+            .onSuccess {
+                animeList = data.data.map { it.toModel() }
+            }
+        return animeList
+    }
+
+    override suspend fun getAnimeById(id: Int): AnimeData? {
+        var animeData: AnimeData? = null
+        api.getAnimeById(id)
+            .onSuccess {
+                animeData = data.data.toModel()
+            }
+        return animeData
     }
 }

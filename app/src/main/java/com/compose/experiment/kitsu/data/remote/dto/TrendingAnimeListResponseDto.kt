@@ -1,7 +1,17 @@
 package com.compose.experiment.kitsu.data.remote.dto
 
-data class TrendingAnimeListDto(
+import com.compose.experiment.kitsu.domain.model.AnimeData
+import com.compose.experiment.kitsu.domain.model.Attributes
+import com.compose.experiment.kitsu.domain.model.CoverImage
+import com.compose.experiment.kitsu.domain.model.PosterImage
+import com.compose.experiment.kitsu.domain.model.Titles
+
+data class TrendingAnimeListResponseDto(
     val data: List<AnimeDataDto>
+)
+
+data class AnimeResponseDto(
+    val data: AnimeDataDto
 )
 
 data class AnimeDataDto(
@@ -10,7 +20,9 @@ data class AnimeDataDto(
     val links: LinksDto,
     val relationships: Relationships,
     val type: String
-)
+) {
+    fun toModel(): AnimeData = AnimeData(id = id, attributes = attributes.toModel())
+}
 
 data class AttributesDto(
     val updatedAt: String? = null,
@@ -21,9 +33,9 @@ data class AttributesDto(
     val coverImageTopOffset: Int? = null,
     val titles: TitlesDto? = null,
     val canonicalTitle: String? = null,
-    val abbreviatedTitles: List<String>? =null,
+    val abbreviatedTitles: List<String>? = null,
     val averageRating: String? = null,
-    val ratingFrequencies: Map<String,String>? = null,
+    val ratingFrequencies: Map<String, String>? = null,
     val userCount: Int? = null,
     val favoritesCount: Int? = null,
     val startDate: String? = null,
@@ -36,18 +48,47 @@ data class AttributesDto(
     val status: String? = null,
     val posterImage: PosterImageDto? = null,
     val coverImage: CoverImageDto? = null,
-    val chapterCount: Int? = null,
-    val tba: String? = null,
-    val volumeCount: Int? = null,
-    val serialization: String? = null,
-    val mangaType: String? = null,
-)
+    val episodeCount: Int? = null,
+    val episodeLength: Int? = null,
+    val youtubeVideoId: String? = null,
+    val showType: String? = null,
+    val nsfw: Boolean? = null
+) {
+    fun toModel(): Attributes =
+        Attributes(
+            createdAt = createdAt,
+            updatedAt = updatedAt,
+            slug = slug,
+            synopsis = synopsis,
+            titles = titles?.toModel(),
+            canonicalTitle = canonicalTitle,
+            abbreviatedTitles = abbreviatedTitles,
+            ageRating = ageRatingGuide,
+            coverImage = coverImage?.toModel(),
+            subtype = subtype,
+            posterImage = posterImage?.toModel(),
+            episodeCount = episodeCount,
+            episodeLength = episodeLength,
+            showType = showType,
+            ageRatingGuide = ageRatingGuide,
+            favoritesCount = favoritesCount,
+            popularityRank = popularityRank,
+            status = status,
+            endDate = endDate,
+            startDate = startDate,
+            userCount = userCount,
+            averageRating = averageRating,
+            ratingRank = ratingRank
+        )
+}
 
 data class TitlesDto(
     val en: String? = null,
     val en_jp: String? = null,
     val ja_jp: String? = null
-)
+) {
+    fun toModel(): Titles = Titles(en = en)
+}
 
 data class PosterImageDto(
     val large: String? = null,
@@ -56,7 +97,10 @@ data class PosterImageDto(
     val original: String? = null,
     val small: String? = null,
     val tiny: String? = null
-)
+) {
+    fun toModel(): PosterImage =
+        PosterImage(tiny = tiny, small = small, medium = medium, large = large, original = original)
+}
 
 data class MetaDto(
     val dimensions: DimensionsDto? = null
@@ -80,7 +124,10 @@ data class CoverImageDto(
     val original: String? = null,
     val small: String? = null,
     val tiny: String? = null
-)
+) {
+    fun toModel(): CoverImage =
+        CoverImage(tiny = tiny, small = small, large = large, original = original)
+}
 
 data class Relationships(
     val castings: RelationDto? = null,

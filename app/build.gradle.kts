@@ -66,7 +66,7 @@ dependencies {
 
     implementation(libs.androidx.appcompat)
     implementation(libs.androidx.core.ktx)
-    implementation(libs.androidx.lifecycle.runtime.ktx)
+
     implementation(libs.androidx.activity.compose)
 
     implementation(platform(libs.androidx.compose.bom))
@@ -75,15 +75,24 @@ dependencies {
     implementation(libs.ui.tooling.preview)
     implementation(libs.androidx.material3)
 
+    // Lifecycle
+    implementation(libs.androidx.lifecycle.runtime.ktx)
+    implementation(libs.androidx.lifecycle.viewmodel.compose)
+    implementation(libs.androidx.lifecycle.runtime.compose)
+    implementation(libs.androidx.lifecycle.livedata.ktx)
+
     implementation(libs.androidx.material.icons.extended)
+
+    //Navigation
+    implementation(libs.androidx.navigation.ui.ktx)
     implementation(libs.androidx.navigation.compose)
 
-    implementation(libs.androidx.lifecycle.viewmodel.compose)
-
+    //Postgres
     implementation(libs.postgrest.kt)
     implementation(libs.ktor.client.cio)
     implementation(libs.kotlinx.serialization.json)
 
+    // Hilt
     implementation(libs.hilt.android)
     implementation(libs.androidx.work.runtime.ktx)
     kapt(libs.hilt.android.compiler)
@@ -118,7 +127,18 @@ dependencies {
     // Arrow
     implementation(libs.arrow.core)
     implementation(libs.arrow.fx.coroutines)
-    // Retrofit
-    implementation(libs.retrofit)
+
+    //Retrofit
+    implementation(libs.squareup.retrofit)
+    implementation(libs.retrofit2.converter.moshi)
+    implementation(libs.squareup.moshi.kotlin)
+    implementation(libs.skydoves.sandwich.retrofit)
     implementation(libs.converter.gson)
+
+    // HTTP Client + Utilities
+    implementation(libs.squareup.retrofit)
+    implementation(libs.converter.scalars)
+    implementation(platform(libs.okhttp.bom))
+    implementation(libs.okhttp)
+    implementation(libs.okhttp.logging.interceptor)
 }
