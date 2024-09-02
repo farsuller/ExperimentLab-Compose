@@ -43,7 +43,7 @@
         </activity>
 
         <!-- RunningService definition -->
-        <service android:name=".RunningService"
+        <service android:name=".utils.RunningService"
             android:foregroundServiceType="location"/>
 
         <activity android:name=".presentations.fingerprint.biometrics1.FingerprintFragmentActivity" />

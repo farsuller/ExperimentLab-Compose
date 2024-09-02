@@ -26,7 +26,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
-import com.compose.experiment.model.Experience
+import com.compose.experiment.data.Experience
 
 @OptIn(ExperimentalSharedTransitionApi::class)
 @Composable

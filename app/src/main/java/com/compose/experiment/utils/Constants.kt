@@ -1,4 +1,4 @@
-package com.compose.experiment
+package com.compose.experiment.utils
 
 object Constants {
     const val FACEBOOK_LINK = "https://www.facebook.com/florencze"

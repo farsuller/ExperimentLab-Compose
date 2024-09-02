@@ -1,4 +1,4 @@
-package com.compose.experiment.dispatcher
+package com.compose.experiment.utils.dispatcher
 
 import kotlinx.coroutines.CoroutineDispatcher
 

@@ -1,4 +1,4 @@
-package com.compose.experiment.connectivity
+package com.compose.experiment.utils.connectivity
 
 import kotlinx.coroutines.flow.Flow
 

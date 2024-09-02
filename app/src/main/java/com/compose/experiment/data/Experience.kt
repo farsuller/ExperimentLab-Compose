@@ -1,11 +1,11 @@
-package com.compose.experiment.model
+package com.compose.experiment.data
 
-import com.compose.experiment.Constants.COLLABERA
-import com.compose.experiment.Constants.EMAPTA
-import com.compose.experiment.Constants.FPT
-import com.compose.experiment.Constants.YONDU
-import com.compose.experiment.Constants.ZIGZAG
-import com.compose.experiment.Res
+import com.compose.experiment.utils.Constants.COLLABERA
+import com.compose.experiment.utils.Constants.EMAPTA
+import com.compose.experiment.utils.Constants.FPT
+import com.compose.experiment.utils.Constants.YONDU
+import com.compose.experiment.utils.Constants.ZIGZAG
+import com.compose.experiment.utils.Res
 
 
 enum class Experience(

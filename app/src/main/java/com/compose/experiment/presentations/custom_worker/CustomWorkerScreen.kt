@@ -24,7 +24,7 @@ import androidx.work.ExistingPeriodicWorkPolicy
 import androidx.work.NetworkType
 import androidx.work.PeriodicWorkRequestBuilder
 import androidx.work.WorkManager
-import com.compose.experiment.workmanager.CustomWorker
+import com.compose.experiment.utils.workmanager.CustomWorker
 import kotlinx.coroutines.delay
 import java.time.Duration
 import java.util.concurrent.TimeUnit

@@ -1,6 +1,6 @@
 package com.compose.experiment.presentations.pagination
 
-import com.compose.experiment.model.ListItem
+import com.compose.experiment.presentations.pagination.model.ListItem
 
 // Data class to represent the UI state including loading state,
 // items, error message, pagination info, etc.

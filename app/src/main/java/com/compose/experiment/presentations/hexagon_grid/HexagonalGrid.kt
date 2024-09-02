@@ -28,7 +28,7 @@ import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.compose.experiment.utils.clickableWithoutRipple
 import com.compose.experiment.presentations.components.HexagonShape
-import com.compose.experiment.model.Menus
+import com.compose.experiment.data.Menus
 
 @Composable
 fun HexagonalGrid(modifier: Modifier = Modifier) {

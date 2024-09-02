@@ -1,6 +1,6 @@
 package com.compose.experiment.presentations.pagination.repository
 
-import com.compose.experiment.model.ListItem
+import com.compose.experiment.presentations.pagination.model.ListItem
 import kotlinx.coroutines.delay
 
 // Repository to provide paginated data. Simulates a remote data source.

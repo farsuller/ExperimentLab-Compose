@@ -1,9 +1,10 @@
-package com.compose.experiment
+package com.compose.experiment.utils
 
 import android.app.Service
 import android.content.Intent
 import android.os.IBinder
 import androidx.core.app.NotificationCompat
+import com.compose.experiment.R
 
 class RunningService : Service() {
 
