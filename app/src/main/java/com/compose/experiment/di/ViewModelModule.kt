@@ -5,7 +5,7 @@ import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import com.compose.experiment.MainViewModel
 import com.compose.experiment.presentations.local_search.TodoSearchManager
-import com.compose.experiment.presentations.pagination.repository.DefaultUserRepository
+import com.compose.experiment.pagination.repository.DefaultUserRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

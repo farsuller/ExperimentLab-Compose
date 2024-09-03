@@ -46,9 +46,9 @@
         <service android:name=".utils.RunningService"
             android:foregroundServiceType="location"/>
 
-        <activity android:name=".presentations.fingerprint.biometrics1.FingerprintFragmentActivity" />
+        <activity android:name=".fingerprint.biometrics1.FingerprintFragmentActivity" />
         <activity
-            android:name=".presentations.fingerprint.biometrics2.BiometricAppCompatActivity"
+            android:name=".fingerprint.biometrics2.BiometricAppCompatActivity"
             android:theme="@style/Theme.ExperimentLab.Biometric"/>
     </application>
 

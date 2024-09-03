@@ -1,0 +1,10 @@
+package com.compose.experiment.fingerprint.biometrics1
+
+
+// Enum class to represent various biometric authentication statuses
+enum class BiometricAuthStatus(val id : Int) {
+    READY(1),
+    NOT_AVAILABLE(-1),
+    TEMPORARY_NOT_AVAILABLE(-2),
+    AVAILABLE_BUT_NOT_ENROLLED(-3)
+}

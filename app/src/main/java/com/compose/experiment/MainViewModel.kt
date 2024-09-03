@@ -14,6 +14,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.compose.experiment.data.ApiResult
 import com.compose.experiment.model.User
+import com.compose.experiment.pagination.repository.UserRepository
 import com.compose.experiment.presentations.local_search.Todo
 import com.compose.experiment.presentations.local_search.TodoListState
 import com.compose.experiment.presentations.local_search.TodoSearchManager
@@ -21,18 +22,13 @@ import com.compose.experiment.presentations.snackbars.SnackbarAction
 import com.compose.experiment.presentations.snackbars.SnackbarController
 import com.compose.experiment.presentations.snackbars.SnackbarEvent
 import com.compose.experiment.presentations.wrapper.WrapperRepository
-import com.compose.experiment.presentations.pagination.repository.UserRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.Job
-import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import java.util.UUID
@@ -60,24 +56,10 @@ class MainViewModel @Inject constructor(
 
     val data = wrapperRepository.fetchDataWithWrapper()
 
-    // Create a channel for navigation events, which can be used to send and receive events.
-    private val navigationChannel = Channel<NavigationEvent>()
-
-    // Convert the navigation channel into a Flow for observing navigation events.
-    val navigationEventsChannelFlow = navigationChannel.receiveAsFlow()
-
-    // Create a MutableSharedFlow with a buffer that can replay the last 3 events.
-    private val _navigationEvents = MutableSharedFlow<NavigationEvent>(replay = 3)
-
-    // Expose the shared flow as a read-only SharedFlow for external observers.
-    val navigationSharedFlow = _navigationEvents.asSharedFlow()
-
 
     var isLoggedIn by mutableStateOf(false)
         private set
 
-    var loginState by mutableStateOf(LoginState())
-        private set
 
     var state by mutableStateOf(TodoListState())
         private set // With a private setter, the state can be accessed or read in the UI but can only be modified in the view model.
@@ -144,19 +126,6 @@ class MainViewModel @Inject constructor(
         super.onCleared()
     }
 
-    fun login() {
-        viewModelScope.launch {
-            loginState = loginState.copy(isLoading = true)
-            delay(3000L)
-
-            //navigationChannel.send(NavigationEvent.NavigateToProfile)
-            _navigationEvents.emit(NavigationEvent.NavigateToProfile)
-
-            loginState = loginState.copy(
-                isLoading = false,
-            )
-        }
-    }
 
     fun showSnackBar(item : Int , actionPressed : () -> Unit = {}){
         viewModelScope.launch {

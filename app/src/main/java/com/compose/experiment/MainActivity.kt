@@ -8,7 +8,7 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.RequiresApi
-import com.compose.experiment.kitsu.presenstation.navigation.KitsuNavigation
+import com.compose.experiment.presentations.hotflow_coldflow.LocationFlowDemo
 import com.compose.experiment.ui.theme.ExperimentLabTheme
 import com.compose.experiment.utils.sharedPreferences
 import dagger.hilt.android.AndroidEntryPoint
@@ -38,7 +38,7 @@ class MainActivity : ComponentActivity() {
         token = ""
         setContent {
             ExperimentLabTheme(dynamicColor = false) {
-                KitsuNavigation()
+                LocationFlowDemo()
             }
         }
     }
