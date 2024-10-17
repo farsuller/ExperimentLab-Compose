@@ -8,7 +8,12 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.RequiresApi
-import com.compose.experiment.presentations.hotflow_coldflow.LocationFlowDemo
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material3.Surface
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import com.compose.experiment.presentations.collapsing_header.CollapsingHeader
 import com.compose.experiment.ui.theme.ExperimentLabTheme
 import com.compose.experiment.utils.sharedPreferences
 import dagger.hilt.android.AndroidEntryPoint
@@ -38,10 +43,20 @@ class MainActivity : ComponentActivity() {
         token = ""
         setContent {
             ExperimentLabTheme(dynamicColor = false) {
-                LocationFlowDemo()
+                Surface {
+                    Box (
+                        modifier = Modifier.fillMaxSize(),
+                        contentAlignment = Alignment.Center
+                    ){
+                        CollapsingHeader()
+                    }
+
+                }
+
             }
         }
     }
+
 
 
     // Function to request location and notification permissions

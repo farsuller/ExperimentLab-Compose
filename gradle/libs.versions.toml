@@ -3,6 +3,7 @@ agp = "8.5.2"
 appcompat = "1.7.0"
 arrowCore = "1.2.0"
 biometric = "1.2.0-alpha05"
+constraintlayoutComposeVersion = "1.1.0-alpha03"
 converterGson = "2.9.0"
 kotlin = "2.0.0"
 activityCompose = "1.9.1"
@@ -52,6 +53,7 @@ squareupRetrofit = "2.11.0"
 moshiKotlinVersion = "1.15.1"
 converterMoshiVersion = "2.11.0"
 converterScalars = "2.11.0"
+composeMaterial = "1.4.0"
 
 [libraries]
 androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "activityCompose" }
@@ -129,6 +131,7 @@ squareup-moshi-kotlin = { module = "com.squareup.moshi:moshi-kotlin", version.re
 retrofit2-converter-moshi = { module = "com.squareup.retrofit2:converter-moshi", version.ref = "converterMoshiVersion" }
 squareup-retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "squareupRetrofit" }
 converter-scalars = { module = "com.squareup.retrofit2:converter-scalars", version.ref = "converterScalars" }
+androidx-compose-material = { group = "androidx.wear.compose", name = "compose-material", version.ref = "composeMaterial" }
 
 
 [plugins]

@@ -4,7 +4,7 @@ import android.content.Context
 import android.util.Log
 import androidx.work.CoroutineWorker
 import androidx.work.WorkerParameters
-import kotlinx.coroutines.Dispatchers
+import com.compose.experiment.utils.dispatcher.DispatchersHub
 import kotlinx.coroutines.withContext
 import org.json.JSONObject
 import java.net.HttpURLConnection
@@ -29,7 +29,7 @@ class AnalyticsWorker(context: Context, workerParams: WorkerParameters) :
     CoroutineWorker(context, workerParams) {
 
     override suspend fun doWork(): Result {
-        return withContext(Dispatchers.IO) {
+        return withContext(DispatchersHub.IO) {
             try {
                 // Simulate sending JSON data to a server
                 val url = URL("https://example.com/upload-analytics")
