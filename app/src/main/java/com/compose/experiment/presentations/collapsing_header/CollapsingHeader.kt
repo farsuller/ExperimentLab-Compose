@@ -1,5 +1,7 @@
 package com.compose.experiment.presentations.collapsing_header
 
+import androidx.compose.animation.core.animateDpAsState
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -33,6 +35,7 @@ import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.layout.onSizeChanged
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.IntSize
 import androidx.compose.ui.unit.dp
@@ -51,6 +54,8 @@ fun CollapsingHeader() {
     val tabsHeight by remember(tabsSize) { mutableStateOf(with(density) { tabsSize.height.toDp() }) }
 
     val headerOffsetHeightPx = remember { mutableFloatStateOf(0f) }
+    var scrollProgress by remember { mutableFloatStateOf(0f) }
+
     val nestedScrollConnection = remember(headerSize) {
         object : NestedScrollConnection {
             val headerHeightPx = headerSize.height.toFloat()
@@ -58,11 +63,19 @@ fun CollapsingHeader() {
             override fun onPreScroll(available: Offset, source: NestedScrollSource): Offset {
                 val delta = available.y
                 val newOffset = headerOffsetHeightPx.floatValue + delta
-                headerOffsetHeightPx.floatValue = newOffset.coerceIn(-headerHeightPx, 0f)
+              //  headerOffsetHeightPx.floatValue = newOffset.coerceIn(-headerHeightPx, 0f)
+                scrollProgress = (-headerOffsetHeightPx.floatValue / headerHeightPx).coerceIn(0f, 1f)
                 return Offset.Zero
             }
         }
     }
+
+    val animatedPadding: Dp by animateDpAsState(
+        targetValue = if (scrollProgress > 0.9f) 40.dp else 0.dp,
+        animationSpec = tween(durationMillis = 300),
+        label = "animate-chips"
+    )
+
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -78,7 +91,8 @@ fun CollapsingHeader() {
             // Collapsable top composable
             Header(modifier = Modifier.onSizeChanged { headerSize = it })
             // Composable that will take top of the screen when the list is scrolled up
-            Tabs(modifier = Modifier.onSizeChanged { tabsSize = it })
+            Tabs(modifier = Modifier.onSizeChanged { tabsSize = it }
+                .padding(top = animatedPadding),)
         }
         LazyColumn(
             contentPadding = PaddingValues(top = headerHeight + tabsHeight)
