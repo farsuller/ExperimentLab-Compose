@@ -10,10 +10,19 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.material3.Surface
-import com.compose.experiment.presentations.pull_refresh_lazy_column.PullToRefreshLazyColumnScreen
+import androidx.lifecycle.lifecycleScope
+import com.compose.experiment.kotlinxcustomserializer.BookWorkDto
 import com.compose.experiment.ui.theme.ExperimentLabTheme
 import com.compose.experiment.utils.sharedPreferences
 import dagger.hilt.android.AndroidEntryPoint
+import io.ktor.client.HttpClient
+import io.ktor.client.call.body
+import io.ktor.client.engine.okhttp.OkHttp
+import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
+import io.ktor.client.request.get
+import io.ktor.serialization.kotlinx.json.json
+import kotlinx.coroutines.launch
+import kotlinx.serialization.json.Json
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
@@ -36,11 +45,39 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
 
+        val httpClient = HttpClient(OkHttp){
+            install(ContentNegotiation){
+                json(
+                    json = Json {
+                        ignoreUnknownKeys = true
+                    }
+                )
+            }
+        }
+        val jsonObjectEndpoint = "https://openlibrary.org/works/OL82563W.json"
+        val stringEndpoint = "https://openlibrary.org/works/OL1968368W.json"
+
+        lifecycleScope.launch {
+            listOf(
+                stringEndpoint,
+                jsonObjectEndpoint
+
+            ).forEach { url ->
+               val response = httpClient.get(
+                    urlString = url
+                )
+
+                val dto = response.body<BookWorkDto>()
+
+                println("Book description is ${dto.description}")
+            }
+        }
+
         token = ""
         setContent {
             ExperimentLabTheme(dynamicColor = false) {
                 Surface {
-                    PullToRefreshLazyColumnScreen()
+
 
                 }
 

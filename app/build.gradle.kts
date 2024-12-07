@@ -4,8 +4,8 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
     alias(libs.plugins.compose.compiler)
-    id("dagger.hilt.android.plugin")
-    kotlin("kapt")
+    alias(libs.plugins.hilt)
+    alias(libs.plugins.devtool.ksp)
     alias(libs.plugins.kotlin.serialization)
 }
 
@@ -93,11 +93,14 @@ dependencies {
     implementation(libs.kotlinx.serialization.json)
 
     // Hilt
-    implementation(libs.hilt.android)
+    //Hilt
+    implementation(libs.androidx.hilt.compose.navigation)
+    implementation(libs.hilt)
+    ksp(libs.hilt.compiler)
+
+
     implementation(libs.androidx.work.runtime.ktx)
     implementation(libs.androidx.compose.material)
-    kapt(libs.hilt.android.compiler)
-    implementation(libs.androidx.hilt.navigation.compose)
 
     implementation(libs.lottie.compose)
 
@@ -105,6 +108,9 @@ dependencies {
 
     //Coil
     implementation(libs.bundles.bundle.coil)
+
+    //Ktor
+    implementation(libs.bundles.bundle.ktor)
 
     implementation(libs.orbital)
 
@@ -115,7 +121,7 @@ dependencies {
     implementation(libs.androidx.compose.material3.adaptive.navigation.suite)
     implementation(libs.androidx.compose.material3.adaptive.navigation)
 
-    kapt(libs.androidx.appsearch.compiler)
+    ksp(libs.androidx.appsearch.compiler)
     implementation(libs.bundles.appsearch)
 
     implementation(libs.kotlinx.coroutines.test)
@@ -148,4 +154,7 @@ dependencies {
 
     //Location
     implementation(libs.play.services.location)
+
+
+    androidTestImplementation(libs.hilt.android.testing)
 }
