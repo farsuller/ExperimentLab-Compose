@@ -12,13 +12,11 @@ import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Text
-import androidx.compose.material3.pulltorefresh.PullToRefreshContainer
+import androidx.compose.material3.pulltorefresh.PullToRefreshBox
 import androidx.compose.material3.pulltorefresh.rememberPullToRefreshState
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.unit.dp
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -33,9 +31,11 @@ fun <T> PullToRefreshLazyColumn(
     lazyListState: LazyListState = rememberLazyListState()
 ) {
     val pullToRefreshState = rememberPullToRefreshState()
-    Box(
-        modifier = modifier
-            .nestedScroll(pullToRefreshState.nestedScrollConnection)
+
+    PullToRefreshBox(
+        state = pullToRefreshState,
+        isRefreshing = isRefreshing,
+        onRefresh = onRefresh
     ) {
         LazyColumn(
             state = lazyListState,
@@ -60,25 +60,5 @@ fun <T> PullToRefreshLazyColumn(
 
             }
         }
-
-        if (pullToRefreshState.isRefreshing) {
-            LaunchedEffect(true) {
-                onRefresh()
-            }
-        }
-
-        LaunchedEffect(isRefreshing) {
-            if (isRefreshing) {
-                pullToRefreshState.startRefresh()
-            } else {
-                pullToRefreshState.endRefresh()
-            }
-        }
-
-        PullToRefreshContainer(
-            state = pullToRefreshState,
-            modifier = Modifier
-                .align(Alignment.TopCenter),
-        )
     }
 }

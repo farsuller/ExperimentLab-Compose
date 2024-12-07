@@ -102,7 +102,9 @@ dependencies {
     implementation(libs.lottie.compose)
 
     implementation (libs.androidx.constraintlayout.compose)
-    implementation(libs.coil.compose)
+
+    //Coil
+    implementation(libs.bundles.bundle.coil)
 
     implementation(libs.orbital)
 
