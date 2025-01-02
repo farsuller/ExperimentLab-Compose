@@ -11,6 +11,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.material3.Surface
 import androidx.lifecycle.lifecycleScope
+import com.compose.experiment.fab_explode.FabExplodeScreen
 import com.compose.experiment.kotlinxcustomserializer.BookWorkDto
 import com.compose.experiment.ui.theme.ExperimentLabTheme
 import com.compose.experiment.utils.sharedPreferences
@@ -44,9 +45,18 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
+        setContent {
+            ExperimentLabTheme(dynamicColor = false) {
+                Surface {
+                    FabExplodeScreen()
+                }
+            }
+        }
+    }
 
-        val httpClient = HttpClient(OkHttp){
-            install(ContentNegotiation){
+    private fun ktorCustomDeserialize() {
+        val httpClient = HttpClient(OkHttp) {
+            install(ContentNegotiation) {
                 json(
                     json = Json {
                         ignoreUnknownKeys = true
@@ -63,24 +73,13 @@ class MainActivity : ComponentActivity() {
                 jsonObjectEndpoint
 
             ).forEach { url ->
-               val response = httpClient.get(
+                val response = httpClient.get(
                     urlString = url
                 )
 
                 val dto = response.body<BookWorkDto>()
 
                 println("Book description is ${dto.description}")
-            }
-        }
-
-        token = ""
-        setContent {
-            ExperimentLabTheme(dynamicColor = false) {
-                Surface {
-
-
-                }
-
             }
         }
     }
