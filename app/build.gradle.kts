@@ -7,6 +7,7 @@ plugins {
     alias(libs.plugins.hilt)
     alias(libs.plugins.devtool.ksp)
     alias(libs.plugins.kotlin.serialization)
+    id ("kotlin-kapt")
 }
 
 android {
@@ -121,8 +122,8 @@ dependencies {
     implementation(libs.androidx.compose.material3.adaptive.navigation.suite)
     implementation(libs.androidx.compose.material3.adaptive.navigation)
 
-    ksp(libs.androidx.appsearch.compiler)
-    implementation(libs.bundles.appsearch)
+//    implementation(libs.bundles.appsearch)
+//    kapt(libs.androidx.appsearch.compiler)
 
     implementation(libs.kotlinx.coroutines.test)
     testImplementation(libs.junit)
@@ -154,6 +155,8 @@ dependencies {
 
     //Location
     implementation(libs.play.services.location)
+
+    implementation(libs.androidx.datastore.preferences)
 
 
     androidTestImplementation(libs.hilt.android.testing)

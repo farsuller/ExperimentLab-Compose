@@ -7,7 +7,6 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.icons.filled.Settings
-import androidx.compose.material3.Button
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -51,9 +50,9 @@ fun NavigationSuiteScaffoldScreen(onBackClick: () -> Unit = {}) {
                Screen.entries.forEachIndexed { index, screen ->
                    if (index == selectedItem) {
                        Text(text = screen.title)
-                       Button(onClick = onBackClick) {
-                           Text(text = "Back")
-                       }
+//                       Button(onClick = onBackClick) {
+//                           Text(text = "Back")
+//                       }
                    }
                }
             }

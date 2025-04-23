@@ -3,11 +3,11 @@ package com.compose.experiment.pagination.pagination
 // Default implementation of the Paginator interface.
 class DefaultPaginator<Key, Item>(
     private val initialKey: Key, // The initial key to start pagination.
-    private inline val onLoadUpdated: (Boolean) -> Unit, // Callback to update loading state.
-    private inline val onRequest: suspend (nextKey: Key) -> Result<List<Item>>, // Request function to load items based on the current key.
-    private inline val getNextKey: suspend (List<Item>) -> Key, // Function to determine the next key based on the items loaded.
-    private inline val onError: suspend (Throwable?) -> Unit, // Callback to handle errors.
-    private inline val onSuccess: suspend (items: List<Item>, newKey: Key) -> Unit // Callback to handle success, updating the state with new items and key.
+    private val onLoadUpdated: (Boolean) -> Unit, // Callback to update loading state.
+    private val onRequest: suspend (nextKey: Key) -> Result<List<Item>>, // Request function to load items based on the current key.
+    private val getNextKey: suspend (List<Item>) -> Key, // Function to determine the next key based on the items loaded.
+    private val onError: suspend (Throwable?) -> Unit, // Callback to handle errors.
+    private val onSuccess: suspend (items: List<Item>, newKey: Key) -> Unit // Callback to handle success, updating the state with new items and key.
 ) : Paginator<Key, Item> {
 
     private var currentKey = initialKey // Tracks the current key for pagination.
