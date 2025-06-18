@@ -56,7 +56,7 @@ fun SharedTransitionScope.SharedElementListScreen(
                         .weight(1f)
                         // Use sharedElement to specify the shared element transition
                         .sharedElement(
-                            state = rememberSharedContentState(key = "image/${experiences[index].image}"),
+                            sharedContentState = rememberSharedContentState(key = "image/${experiences[index].image}"),
                             animatedVisibilityScope = animatedVisibilityScope,
                             // Use boundsTransform to specify the transformation during the transition
                             boundsTransform = { _, _ ->
@@ -77,7 +77,7 @@ fun SharedTransitionScope.SharedElementListScreen(
                         .weight(1F)
                         // Use sharedElement to specify the shared element transition
                         .sharedElement(
-                            state = rememberSharedContentState(key = "text/${experiences[index].company}"),
+                            sharedContentState = rememberSharedContentState(key = "text/${experiences[index].company}"),
                             animatedVisibilityScope = animatedVisibilityScope,
                             // Use boundsTransform to specify the transformation during the transition
                             boundsTransform = { _, _ ->
@@ -110,7 +110,7 @@ fun SharedTransitionScope.SharedElementDetailScreen(
                 .weight(1f)
                 // Use sharedElement to specify the shared element transition
                 .sharedElement(
-                    state = rememberSharedContentState(key = "image/$companyImage"),
+                    sharedContentState = rememberSharedContentState(key = "image/$companyImage"),
                     animatedVisibilityScope = animatedVisibilityScope,
                     // Use boundsTransform to specify the transformation during the transition
                     boundsTransform = { _, _ ->
@@ -131,7 +131,7 @@ fun SharedTransitionScope.SharedElementDetailScreen(
                 .weight(1F)
                 // Use sharedElement to specify the shared element transition
                 .sharedElement(
-                    state = rememberSharedContentState(key = "text/$companyName"),
+                    sharedContentState = rememberSharedContentState(key = "text/$companyName"),
                     animatedVisibilityScope = animatedVisibilityScope,
                     // Use boundsTransform to specify the transformation during the transition
                     boundsTransform = { _, _ ->

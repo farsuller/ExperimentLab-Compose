@@ -1,7 +1,6 @@
 package com.compose.experiment
 
 import android.Manifest
-import android.content.Context
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
@@ -11,29 +10,13 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
-import androidx.compose.runtime.setValue
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.datastore.dataStore
 import androidx.lifecycle.lifecycleScope
-import androidx.wear.compose.material.Text
-import com.compose.experiment.encryption.UserPreferences
-import com.compose.experiment.encryption.UserPreferencesSerializer
 import com.compose.experiment.kotlinxcustomserializer.BookWorkDto
+import com.compose.experiment.presentations.navigation3.RootGraph
 import com.compose.experiment.ui.theme.ExperimentLabTheme
-import com.compose.experiment.utils.sharedPreferences
 import dagger.hilt.android.AndroidEntryPoint
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
@@ -41,16 +24,8 @@ import io.ktor.client.engine.okhttp.OkHttp
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.client.request.get
 import io.ktor.serialization.kotlinx.json.json
-import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import kotlinx.serialization.json.Json
-
-val Context.dataStore by dataStore(
-    fileName = "user-preferences",
-    serializer = UserPreferencesSerializer
-)
-
-val SECRET_TOKEN = "Hello, you decrypted me great!"
 
 
 @AndroidEntryPoint
@@ -67,9 +42,6 @@ class MainActivity : ComponentActivity() {
             }
         }
 
-
-    private var token by sharedPreferences(name = "token")
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -78,43 +50,8 @@ class MainActivity : ComponentActivity() {
                 Surface(
                     modifier = Modifier.background(MaterialTheme.colorScheme.primary)
                 ) {
-                    val scope = rememberCoroutineScope()
-                    var text by remember { mutableStateOf("") }
 
-                    Box(
-                        modifier = Modifier.fillMaxSize(),
-                        contentAlignment = Alignment.Center
-                    ) {
-                        Column(
-                            modifier = Modifier.fillMaxWidth(),
-                            horizontalAlignment = Alignment.CenterHorizontally
-                        ) {
-                            Button(onClick = {
-                                scope.launch {
-                                    dataStore.updateData {
-                                        UserPreferences(token = SECRET_TOKEN)
-                                    }
-                                }
-                            }) {
-                                Text(text = "Encrypt")
-                            }
-
-                            Button(onClick = {
-                                scope.launch {
-                                    text = dataStore.data.first()?.token ?: ""
-                                }
-                            }) {
-                                Text(text = "Decrypt")
-                            }
-
-
-                            Text(
-                                color = Color.Black,
-                                text = text
-                            )
-                        }
-                    }
-
+                    RootGraph()
                 }
             }
         }
@@ -190,3 +127,5 @@ class MainActivity : ComponentActivity() {
         }
     }
 }
+
+

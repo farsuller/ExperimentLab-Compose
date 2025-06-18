@@ -27,9 +27,6 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.lifecycle.viewmodel.compose.viewModel
-import com.compose.experiment.MainViewModel
 import com.compose.experiment.presentations.snackbars.SnackbarController
 import com.compose.experiment.presentations.snackbars.SnackbarEvent
 import kotlinx.coroutines.launch
@@ -68,21 +65,21 @@ fun NavigableListDetailPaneContent(modifier: Modifier = Modifier,
                         modifier = Modifier
                             .fillParentMaxWidth()
                             .clickable {
-                                navigator.navigateTo(
-                                    pane = ListDetailPaneScaffoldRole.Detail,
-                                    content = "Item $it"
-                                )
-                                if(it % 2 == 0){
-                                    scope.launch {
+                                scope.launch {
+                                    navigator.navigateTo(
+                                        pane = ListDetailPaneScaffoldRole.Detail,
+                                        contentKey = "Item $it"
+                                    )
+
+                                    if(it % 2 == 0){
                                         SnackbarController.sendEvent(
                                             event = SnackbarEvent(
                                                 message = "Item $it clicked",
                                             )
                                         )
                                     }
+                                    else onClick(it)
                                 }
-                                else onClick(it)
-
                             }
                             .padding(16.dp)
                     )
@@ -90,7 +87,7 @@ fun NavigableListDetailPaneContent(modifier: Modifier = Modifier,
             }
         },
         detailPane = {
-            val content = navigator.currentDestination?.content?.toString() ?: "Select an item"
+            val content = navigator.currentDestination?.pane?.toString() ?: "Select an item"
             AnimatedPane {
                 Column(
                     modifier = Modifier
@@ -103,10 +100,13 @@ fun NavigableListDetailPaneContent(modifier: Modifier = Modifier,
                     Row {
                         AssistChip(
                             onClick = {
-                                navigator.navigateTo(
-                                    pane = ListDetailPaneScaffoldRole.Extra,
-                                    content = "Option 1"
-                                )
+                                scope.launch {
+                                    navigator.navigateTo(
+                                        pane = ListDetailPaneScaffoldRole.Extra,
+                                        contentKey = "Option 1"
+                                    )
+                                }
+
                             },
                             label = {
                                 Text(text = "Option 1")
@@ -115,10 +115,13 @@ fun NavigableListDetailPaneContent(modifier: Modifier = Modifier,
                         Spacer(modifier = Modifier.width(16.dp))
                         AssistChip(
                             onClick = {
-                                navigator.navigateTo(
-                                    pane = ListDetailPaneScaffoldRole.Extra,
-                                    content = "Option 2"
-                                )
+                                scope.launch {
+                                    navigator.navigateTo(
+                                        pane = ListDetailPaneScaffoldRole.Extra,
+                                        contentKey = "Option 2"
+                                    )
+                                }
+
                             },
                             label = {
                                 Text(text = "Option 2")
@@ -129,7 +132,7 @@ fun NavigableListDetailPaneContent(modifier: Modifier = Modifier,
             }
         },
         extraPane = {
-            val content = navigator.currentDestination?.content?.toString() ?: "Select an option"
+            val content = navigator.currentDestination?.pane?.toString() ?: "Select an option"
             AnimatedPane {
                 Box(
                     modifier = Modifier
