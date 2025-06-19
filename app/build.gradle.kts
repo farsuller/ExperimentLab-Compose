@@ -7,6 +7,7 @@ plugins {
     alias(libs.plugins.hilt)
     alias(libs.plugins.devtool.ksp)
     alias(libs.plugins.kotlin.serialization)
+    alias (libs.plugins.kotlin.parcelize)
     id ("kotlin-kapt")
 }
 
@@ -93,12 +94,16 @@ dependencies {
     implementation(libs.ktor.client.cio)
     implementation(libs.kotlinx.serialization.json)
 
-    // Hilt
     //Hilt
     implementation(libs.androidx.hilt.compose.navigation)
     implementation(libs.hilt)
     ksp(libs.hilt.compiler)
 
+    implementation(libs.androidx.room.runtime)
+    implementation(libs.androidx.room.ktx)
+    ksp(libs.androidx.room.compiler)
+
+    implementation (libs.gson)
 
     implementation(libs.androidx.work.runtime.ktx)
     implementation(libs.androidx.compose.material)

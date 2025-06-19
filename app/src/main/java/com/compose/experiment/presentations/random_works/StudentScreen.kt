@@ -46,7 +46,7 @@ fun StudentScreen(){
     val studentState by viewModel.studentsState.collectAsState()
 
     var expanded by remember { mutableStateOf(false) }
-    var courseSelected by remember { mutableStateOf<Course>(Course(name = "Courses")) }
+    var courseSelected by remember { mutableStateOf<Course>(Course(id = 0, name = "")) }
 
     var courses = "Courses"
     var selectedIndex = -1
