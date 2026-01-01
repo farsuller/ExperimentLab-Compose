@@ -15,8 +15,8 @@ import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.lifecycleScope
 import com.compose.experiment.kotlinxcustomserializer.BookWorkDto
-import com.compose.experiment.presentations.random_works.StudentScreen
 import com.compose.experiment.ui.theme.ExperimentLabTheme
+import com.compose.experiment.workmanager.screen.CounterWorkerScreen
 import dagger.hilt.android.AndroidEntryPoint
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
@@ -50,8 +50,7 @@ class MainActivity : ComponentActivity() {
                 Surface(
                     modifier = Modifier.background(MaterialTheme.colorScheme.primary)
                 ) {
-
-                    StudentScreen()
+                    CounterWorkerScreen(context = this, lifecycleOwner = this)
                 }
             }
         }

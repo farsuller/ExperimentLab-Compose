@@ -171,7 +171,6 @@ dependencies {
     implementation(libs.okhttp)
     implementation(libs.okhttp.logging.interceptor)
 
-
     //Location
     implementation(libs.play.services.location)
 
